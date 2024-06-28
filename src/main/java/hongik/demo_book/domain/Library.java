@@ -21,4 +21,19 @@ public class Library {
     @Enumerated(EnumType.STRING)
     private LibraryStatus book_status;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    public void setMember(Member member) {
+        this.member = member;
+        member.getLibrarys().add(this);
+    }
+
+    public static Library createlibrary(Member member) {
+        Library library = new Library();
+        library.setMember(member);
+        return library;
+    }
+
 }
