@@ -8,7 +8,7 @@ import lombok.Setter;
 //즐겨찾기한 도서관 목록
 @Entity
 @Getter @Setter
-@NoArgsConstructor
+@NoArgsConstructor//기본 생성자 entity 사용하는 경우 반드시 작성하기
 public class Library {
     @Id
     @GeneratedValue
@@ -19,7 +19,7 @@ public class Library {
     private String library_code;
 
     @Enumerated(EnumType.STRING)
-    private LibraryStatus book_status;
+    private LibraryStatus library_status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")

@@ -2,11 +2,15 @@ package hongik.demo_book.domain;
 
 
 import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Embeddable
 //member entity에 종속
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Address {
 
     private String city;
@@ -14,13 +18,5 @@ public class Address {
     //세부주소
     private String zipcode;
 
-    protected Address() {
-    }
-
-    public Address(String city, String street, String zipcode) {
-        this.city = city;
-        this.street = street;
-        this.zipcode = zipcode;//우편번호
-    }
 }
 

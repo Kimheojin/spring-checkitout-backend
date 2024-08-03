@@ -6,6 +6,7 @@ package hongik.demo_book.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import static jakarta.persistence.FetchType.LAZY;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 public class Category {
 
     //name -> enum 으로 바꿔서 추가하기

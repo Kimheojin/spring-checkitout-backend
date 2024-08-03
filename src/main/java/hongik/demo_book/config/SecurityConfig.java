@@ -21,7 +21,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.filter.CorsFilter;
 
 
-@EnableWebSecurity
+//기본적인 security 설정을 위해
+@EnableWebSecurity//기본적인 웹 보안 활성화 위해
 @EnableMethodSecurity
 @Configuration
 //강의랑 조금 다르게함
@@ -61,11 +62,11 @@ public class SecurityConfig {
                 )
 
 
-                //h2 데이터베이스 허용
+                //h2 데이터베이스 허용//httprequests -> 접근에 대한 요청에 대한 설정
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                        .requestMatchers("/api/hello", "/api/authenticate", "/api/signup").permitAll()
+                        .requestMatchers("/api/hello", "/api/authenticate", "/api/signup").permitAll()//위 3가지는 허용
                         .requestMatchers(PathRequest.toH2Console()).permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().authenticated()//나머지 요청들은 모두 인증을 받아야 한다
                 )
 
                 // 세션을 사용하지 않기 때문에 STATELESS로 설정

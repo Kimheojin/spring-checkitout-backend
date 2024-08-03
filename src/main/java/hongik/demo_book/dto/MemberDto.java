@@ -25,6 +25,7 @@ public class MemberDto {
     @Size(min = 3, max = 100)
     private String password;
 
+    //닉네임 대신 email 사용
     @NotNull
     @Size(min = 3, max = 50)
     private String email;
@@ -35,7 +36,7 @@ public class MemberDto {
         if(member == null) return null;
 
         return MemberDto.builder()
-                .membername(member.getName())
+                .membername(member.getMembername())
                 .email(member.getEmail())
                 .authorityDtoSet(member.getAuthorities().stream()
                         .map(authority -> AuthorityDto.builder().authorityName(authority.getAuthorityName()).build())

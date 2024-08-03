@@ -21,10 +21,10 @@ import java.util.Date;
 import java.util.stream.Collectors;
 
 
-//token의 생성과 유효성 담당
+
 @Component
 public class TokenProvider implements InitializingBean {
-
+    //token의 생성과 유효성 담당
     private final Logger logger = LoggerFactory.getLogger(TokenProvider.class);
     private static final String AUTHORITIES_KEY = "auth";
     private final String secret;
@@ -40,7 +40,7 @@ public class TokenProvider implements InitializingBean {
     }
 
 
-    //주입받은 거 decoder하는 역할
+    //주입받은 후 key 변수에 할당
     @Override
     public void afterPropertiesSet() {
         byte[] keyBytes = Decoders.BASE64.decode(secret);
@@ -53,9 +53,10 @@ public class TokenProvider implements InitializingBean {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
 
+        //만료시간 관련
         long now = (new Date()).getTime();
         Date validity = new Date(now + this.tokenValidityInMilliseconds);
-//생성해서 return
+    //생성해서 return
         return Jwts.builder()
                 .setSubject(authentication.getName())
                 .claim(AUTHORITIES_KEY, authorities)
@@ -84,6 +85,7 @@ public class TokenProvider implements InitializingBean {
         return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }
 
+    //유효성 검사
     public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);

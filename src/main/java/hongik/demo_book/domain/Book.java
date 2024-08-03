@@ -3,6 +3,7 @@ package hongik.demo_book.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "books")
 @Getter @Setter
+@NoArgsConstructor
 public class Book {
 
     @Id
@@ -38,7 +40,6 @@ public class Book {
     }
 
     //생성 메소드
-
     public static Book createbook(Member member) {
         Book book = new Book();
         book.setMember(member);

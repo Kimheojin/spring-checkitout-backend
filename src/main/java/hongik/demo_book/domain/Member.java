@@ -26,9 +26,9 @@ public class Member {
     private Long id;
 
     @Column(name="membername", length = 50)
-    private String name;
+    private String membername;
 
-    @Column(unique = true)
+    @Column(name = "email", unique = true)
     private String email;
 
 
@@ -50,12 +50,15 @@ public class Member {
 
 //@JsonIgnore
     @OneToMany(mappedBy = "member")
+    @Builder.Default
     private List<Book> books = new ArrayList<>();
 
 
     @OneToMany(mappedBy = "member")
+    @Builder.Default
     private List<Library> librarys = new ArrayList<>();
 
+    //관계를 1대다 다대1로 새로 매핑(authority랑)
     @ManyToMany
     @JoinTable(
             name = "member_authority",
