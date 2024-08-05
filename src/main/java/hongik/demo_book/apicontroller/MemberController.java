@@ -14,6 +14,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api")
 public class MemberController {
+
     private final MemberService memberService;
 
     public MemberController(MemberService memberService) {
