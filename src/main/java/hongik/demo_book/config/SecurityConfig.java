@@ -64,10 +64,12 @@ public class SecurityConfig {
 
                 //h2 데이터베이스 허용//httprequests -> 접근에 대한 요청에 대한 설정
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                        .requestMatchers("/api/hello", "/api/authenticate", "/api/signup").permitAll()//위 3가지는 허용
+                        .requestMatchers("/api/hello", "/api/authenticate", "/api/signup")
+                        .permitAll()//위 3가지는 허용
                         .requestMatchers(PathRequest.toH2Console()).permitAll()
                         .anyRequest().authenticated()//나머지 요청들은 모두 인증을 받아야 한다
                 )
+
 
                 // 세션을 사용하지 않기 때문에 STATELESS로 설정
                 .sessionManagement(sessionManagement ->
