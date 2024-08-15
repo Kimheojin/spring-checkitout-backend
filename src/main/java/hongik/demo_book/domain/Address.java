@@ -5,10 +5,12 @@ import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Embeddable
 //member entity에 종속
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Address {

@@ -1,10 +1,12 @@
 package hongik.demo_book.apicontroller;
 
+import hongik.demo_book.dto.AddressDto;
 import hongik.demo_book.dto.MemberDto;
 import hongik.demo_book.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import lombok.Locked;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -57,6 +59,32 @@ public class MemberController {
         return ResponseEntity.ok(memberService.getMemberWithAuthorities(membername));
     }
 
+
+
     //주소 저장
+    //주소 변경
+    @PostMapping("/member/addressSave")
+    @PreAuthorize("hasAnyRole('USER')")
+    public ResponseEntity<AddressDto> saveMemberAddress(
+            @Valid @RequestBody AddressDto addressdto
+    ) {
+        return ResponseEntity.ok(memberService.AddressSave(addressdto));
+    }
+
+
+    //주소 삭제
+    @DeleteMapping("/member/addressDelete")
+    @PreAuthorize("hasAnyRole('USER')")
+    public ResponseEntity<AddressDto> deleteMemberAddress(HttpServletRequest request) {
+        memberService.AddressDelete();
+        return ResponseEntity.noContent().build();
+    }
+
+    //저장된 주소 반환
+    @GetMapping("/member/addressReturn")
+    @PreAuthorize("hasAnyRole('USER')")
+    public ResponseEntity<AddressDto> returnMemberAddress(HttpServletRequest request){
+        return ResponseEntity.ok(memberService.AddressReturn());
+    }
 
 }
