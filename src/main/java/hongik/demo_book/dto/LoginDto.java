@@ -1,5 +1,6 @@
 package hongik.demo_book.dto;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -18,6 +19,10 @@ public class LoginDto {
     @NotNull
     @Size(min = 3, max = 50)
     private String membername;
+
+/*    @NotNull
+    @Email
+    private String email; */
 
     @NotNull
     @Size(min = 3, max = 100)

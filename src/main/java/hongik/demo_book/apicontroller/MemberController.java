@@ -21,12 +21,13 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    //테스트용
+    //서버 동작 확인용 (Token 없어도 동작)
     @GetMapping("/hello")
     public ResponseEntity<String> hello() {
         return ResponseEntity.ok("hello");
     }
 
+    //토큰 있을시 api/member 로 이동
     @PostMapping("/test-redirect")
     public void testRedirect(HttpServletResponse response) throws IOException {
         response.sendRedirect("/api/member");
@@ -41,6 +42,8 @@ public class MemberController {
     }
 
     //USER권한이랑 ADMIN 모두 허용
+    //권한 정보 이용해서 내용 반환하는듯
+    //email도 반환
     @GetMapping("/member")
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<MemberDto> getMyMemberInfo(HttpServletRequest request) {
@@ -53,4 +56,7 @@ public class MemberController {
     public ResponseEntity<MemberDto> getMemberInfo(@PathVariable String membername) {
         return ResponseEntity.ok(memberService.getMemberWithAuthorities(membername));
     }
+
+    //주소 저장
+
 }

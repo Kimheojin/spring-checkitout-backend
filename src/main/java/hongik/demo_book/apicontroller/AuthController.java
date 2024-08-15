@@ -31,7 +31,6 @@ public class AuthController {
     }
 
     //로그인기능 -> 성공시 바디부랑 header부 둘 다 token정보 반환
-    //member
     @PostMapping("/authenticate")
     public ResponseEntity<TokenDto> authorize(@Valid @RequestBody LoginDto loginDto) {
 
@@ -41,6 +40,7 @@ public class AuthController {
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
+        //토큰 생성
         String jwt = tokenProvider.createToken(authentication);
 
         HttpHeaders httpHeaders = new HttpHeaders();

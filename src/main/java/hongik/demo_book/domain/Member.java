@@ -4,6 +4,7 @@ package hongik.demo_book.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import jakarta.validation.constraints.Email;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class Member {
     private String membername;
 
     @Column(name = "email", unique = true)
+    @Email
     private String email;
 
 
