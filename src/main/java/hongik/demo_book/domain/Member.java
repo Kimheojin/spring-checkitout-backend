@@ -48,10 +48,10 @@ public class Member {
     @Column(name = "activated")
     private boolean activated;
 
-//@JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "member")
     @Builder.Default
-    private List<Book> books = new ArrayList<>();
+    private List<Category> categories = new ArrayList<>();
 
 
     @OneToMany(mappedBy = "member")

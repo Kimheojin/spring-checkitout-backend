@@ -2,6 +2,7 @@ package hongik.demo_book.domain;
 
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,28 +22,24 @@ public class Book {
     @Column(name = "book_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
-
-
     private String isbn13;
 
-    @ManyToMany(mappedBy = "books")
-    private List<Category> categories = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
 
 
 
     //연관관계 메소드
-    public void setMember(Member member) {
-        this.member = member;
-        member.getBooks().add(this);
+    public void setCategory(Category category) {
+        this.category = category;
+        category.getBooks().add(this);
     }
 
     //생성 메소드
-    public static Book createbook(Member member) {
+    public static Book createbook(Category category) {
         Book book = new Book();
-        book.setMember(member);
+        book.setCategory(category);
         return book;
     }
 
