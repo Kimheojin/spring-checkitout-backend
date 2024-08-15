@@ -26,7 +26,7 @@ public class MemberService {
 
     @Transactional
     public MemberDto signup(MemberDto memberDto) {
-        if (memberRepository.findOneWithAuthoritiesByMembername(memberDto.getMembername()).orElse(null) != null) {
+        if (memberRepository.findOneWithAuthoritiesByEmail(memberDto.getEmail()).orElse(null) != null) {
             throw new DuplicateMemberException("이미 가입되어 있는 유저입니다.");
         }
 
@@ -46,15 +46,15 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public MemberDto getMemberWithAuthorities(String membername) {
-        return MemberDto.from(memberRepository.findOneWithAuthoritiesByMembername(membername).orElse(null));
+    public MemberDto getMemberWithAuthorities(String email) {
+        return MemberDto.from(memberRepository.findOneWithAuthoritiesByEmail(email).orElse(null));
     }
 
     @Transactional(readOnly = true)
     public MemberDto getMyUserWithAuthorities() {
         return MemberDto.from(
-                SecurityUtil.getCurrentMembername()
-                        .flatMap(memberRepository::findOneWithAuthoritiesByMembername)
+                SecurityUtil.getCurrentEmail()
+                        .flatMap(memberRepository::findOneWithAuthoritiesByEmail)
                         .orElseThrow(() -> new NotFoundMemberException("Member not found"))
         );
     }

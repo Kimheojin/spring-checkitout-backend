@@ -15,14 +15,9 @@ import lombok.*;
 public class LoginDto {
     //이메일, password
 
-
     @NotNull
-    @Size(min = 3, max = 50)
-    private String membername;
-
-/*    @NotNull
     @Email
-    private String email; */
+    private String email;
 
     @NotNull
     @Size(min = 3, max = 100)

@@ -56,9 +56,12 @@ public class TokenProvider implements InitializingBean {
         //만료시간 관련
         long now = (new Date()).getTime();
         Date validity = new Date(now + this.tokenValidityInMilliseconds);
+
+        //수정 부분
+        String email = ((User) authentication.getPrincipal()).getUsername();
     //생성해서 return
         return Jwts.builder()
-                .setSubject(authentication.getName())
+                .setSubject(email)
                 .claim(AUTHORITIES_KEY, authorities)
                 .signWith(key, SignatureAlgorithm.HS512)
                 .setExpiration(validity)

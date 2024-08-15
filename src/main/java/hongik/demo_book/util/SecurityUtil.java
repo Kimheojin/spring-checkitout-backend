@@ -14,7 +14,7 @@ public class SecurityUtil {
 
     private SecurityUtil() {}
 
-    public static Optional<String> getCurrentMembername() {
+    public static Optional<String> getCurrentEmail() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication == null) {

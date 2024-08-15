@@ -10,6 +10,9 @@ import java.util.Optional;
 //db단계 말고 객체 다누이로 담기
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
+/*    @EntityGraph(attributePaths = "authorities")
+    Optional<Member> findOneWithAuthoritiesByMembername(String membername);*/
+
     @EntityGraph(attributePaths = "authorities")
-    Optional<Member> findOneWithAuthoritiesByMembername(String membername);
+    Optional<Member> findOneWithAuthoritiesByEmail(String email);
 }
