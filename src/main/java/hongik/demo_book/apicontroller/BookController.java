@@ -3,10 +3,57 @@ package hongik.demo_book.apicontroller;
 
 //아직 구현 X
 //로그인 비밀번호 변경 + 주소까지 반환 만들고 그거하기
+
+import hongik.demo_book.domain.Book;
+import hongik.demo_book.dto.BookDto;
+
+import hongik.demo_book.dto.BookListDto;
+import hongik.demo_book.service.BookService;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api")
 public class BookController {
 
     //도서 저장
     //도서 목록 반환(enum 별로 )
     //도서 삭제(리스트로 하는게 좋을듯)
+    private final BookService bookService;
 
+    public BookController(BookService bookService){
+        this.bookService = bookService;
+    }
+
+    //도서 저장
+    @PostMapping("/member/bookSave")
+    @PreAuthorize("hasAnyRole('USER')")
+    public ResponseEntity<BookDto> saveMemberBook(
+            @Valid @RequestBody BookDto bookdto
+    ){
+        return ResponseEntity.ok(bookService.BookSave(bookdto));
+    }
+
+    //도서 목록 반환(enum타입 별로)
+    @GetMapping("/member/bookList")
+    @PreAuthorize("hasAnyRole('USER')")
+    public ResponseEntity<List<BookDto>> MemberBookList(
+            @Valid @RequestBody BookListDto bookListDto
+    ){
+        return ResponseEntity.ok(bookService.BookList(bookListDto));
+    }
+
+
+    //도서 삭제
+    @DeleteMapping("/member/bookDelete")
+    @PreAuthorize("hasAnyRole('USER')")
+    public ResponseEntity<List<BookDto>> MemberBookDelete(
+            @Valid @RequestBody BookDto bookDto
+    ){
+        return ResponseEntity.ok(bookService.BookDelete(bookDto));
+    }
 }

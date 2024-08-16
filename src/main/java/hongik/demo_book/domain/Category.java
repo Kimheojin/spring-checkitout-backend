@@ -28,12 +28,12 @@ public class Category {
     //name -> enum 으로 바꿔서 추가하기
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private CategoryName name;
+    private CategoryName categoryName;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")

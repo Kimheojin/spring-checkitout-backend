@@ -8,6 +8,7 @@ import java.util.Optional;
 
 
 //db단계 말고 객체 다누이로 담기
+//extends 다음에 객체 명으로 넣기
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
 /*    @EntityGraph(attributePaths = "authorities")

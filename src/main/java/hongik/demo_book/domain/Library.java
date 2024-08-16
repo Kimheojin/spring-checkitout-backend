@@ -1,6 +1,7 @@
 package hongik.demo_book.domain;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor//기본 생성자 entity 사용하는 경우 반드시 작성하기
 public class Library {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "library_id")
     private Long id;
 
@@ -24,6 +25,9 @@ public class Library {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+
+
 
     public void setMember(Member member) {
         this.member = member;
