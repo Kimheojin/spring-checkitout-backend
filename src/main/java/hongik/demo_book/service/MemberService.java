@@ -122,7 +122,7 @@ public class MemberService {
         Member member = memberRepository.findOneWithAuthoritiesByEmail(currentUserEmail)
                 .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
 
-        Address address = new Address();
+
         return AddressDto.builder()
                 .zipcode(member.getAddress().getZipcode())
                 .street(member.getAddress().getStreet())

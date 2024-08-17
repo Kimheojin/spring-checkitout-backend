@@ -61,7 +61,7 @@ public class MemberController {
 
 
 
-    //주소 저장
+    //주소 저장(구현 완료)
     //주소 변경
     @PostMapping("/member/addressSave")
     @PreAuthorize("hasAnyRole('USER')")
