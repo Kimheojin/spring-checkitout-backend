@@ -15,26 +15,31 @@ import java.util.stream.Collectors;
 
 @Service
 public class LibraryService {
-    private final MemberRepository memberRepository;
+
     private final LibraryRepository libraryRepository;
+    private final UserService userService;
 
+    public LibraryService(LibraryRepository libraryRepository,
+                          UserService userService) {
 
-
-    public LibraryService(MemberRepository memberRepository,
-                       LibraryRepository libraryRepository) {
-        this.memberRepository = memberRepository;
         this.libraryRepository = libraryRepository;
+        this.userService = userService;
     }
+
+
+
 
     //도서관 저장
     @Transactional
     public LibraryDto LibrarySave(LibraryDto libraryDto) {
-        String currentUserEmail = SecurityUtil.getCurrentEmail()
+        /*String currentUserEmail = SecurityUtil.getCurrentEmail()
                 .orElseThrow(() -> new RuntimeException("현재 사용자의 이메일을 찾을 수 없습니다."));
 
 
         Member member = memberRepository.findOneWithAuthoritiesByEmail(currentUserEmail)
-                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));*/
+
+        Member member = userService.GetCurrentMmember();
         //status에 따라 저장하기
         Library library = new Library();
 
@@ -53,13 +58,14 @@ public class LibraryService {
     public List<LibraryDto> LibraryDelete(LibraryDto libraryDto) {
         //status 처리하고 도서관 삭제하기
         //한개만 받음 (목록 삭제 구현 X)
-        String currentUserEmail = SecurityUtil.getCurrentEmail()
+       /* String currentUserEmail = SecurityUtil.getCurrentEmail()
                 .orElseThrow(() -> new RuntimeException("현재 사용자의 이메일을 찾을 수 없습니다."));
 
 
         Member member = memberRepository.findOneWithAuthoritiesByEmail(currentUserEmail)
-                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));*/
 
+        Member member = userService.GetCurrentMmember();
 
         Library libraryToDelete = member.getLibrarys().stream()
                 .filter(library -> library.getLibrary_code().equals(libraryDto.getLibrary_code()))
@@ -77,13 +83,14 @@ public class LibraryService {
     //도서관 리스트 반환
     @Transactional(readOnly = true)
     public List<LibraryDto> LibraryList() {
-        String currentUserEmail = SecurityUtil.getCurrentEmail()
+        /*String currentUserEmail = SecurityUtil.getCurrentEmail()
                 .orElseThrow(() -> new RuntimeException("현재 사용자의 이메일을 찾을 수 없습니다."));
 
 
         Member member = memberRepository.findOneWithAuthoritiesByEmail(currentUserEmail)
                 .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
-
+*/
+        Member member = userService.GetCurrentMmember();
         // 회원과 매핑된 도서관 리스트 가져오기
         //그거 사용
         List<Library> libraries = libraryRepository.findAllByMember(member);

@@ -21,11 +21,17 @@ import java.util.Optional;
 public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
-
-    public MemberService(MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
+    private final UserService userService;
+    public MemberService(MemberRepository memberRepository,
+                         PasswordEncoder passwordEncoder,
+                         UserService userService) {
         this.memberRepository = memberRepository;
         this.passwordEncoder = passwordEncoder;
+        this.userService = userService;
     }
+
+
+
 
     @Transactional
     public MemberDto signup(MemberDto memberDto) {
@@ -66,11 +72,14 @@ public class MemberService {
     //쓰기전용
     @Transactional
     public AddressDto AddressSave(AddressDto addressdto) {
-        String currentUserEmail = SecurityUtil.getCurrentEmail()
+        /*String currentUserEmail = SecurityUtil.getCurrentEmail()
                 .orElseThrow(() -> new RuntimeException("현재 사용자의 이메일을 찾을 수 없습니다."));
 
         Member member = memberRepository.findOneWithAuthoritiesByEmail(currentUserEmail)
-                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));*/
+
+        Member member = userService.GetCurrentMmember();
+
         Address address = new Address();
 
         address.setZipcode(addressdto.getZipcode());
@@ -94,12 +103,13 @@ public class MemberService {
     //주소 삭제
     @Transactional
     public void AddressDelete() {
-        String currentUserEmail = SecurityUtil.getCurrentEmail()
+        /*String currentUserEmail = SecurityUtil.getCurrentEmail()
                 .orElseThrow(() -> new RuntimeException("현재 사용자의 이메일을 찾을 수 없습니다."));
 
         Member member = memberRepository.findOneWithAuthoritiesByEmail(currentUserEmail)
-                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));*/
         //비어있는지 확인
+        Member member = userService.GetCurrentMmember();
 
         Address currentAdddress = member.getAddress();
 
@@ -116,11 +126,13 @@ public class MemberService {
     //주소 목록 반환
     @Transactional(readOnly = true)
     public AddressDto AddressReturn(){
-        String currentUserEmail = SecurityUtil.getCurrentEmail()
+        /*String currentUserEmail = SecurityUtil.getCurrentEmail()
                 .orElseThrow(() -> new RuntimeException("현재 사용자의 이메일을 찾을 수 없습니다."));
 
         Member member = memberRepository.findOneWithAuthoritiesByEmail(currentUserEmail)
-                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));*/
+
+        Member member = userService.GetCurrentMmember();
 
 
         return AddressDto.builder()

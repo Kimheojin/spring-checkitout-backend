@@ -18,29 +18,35 @@ import java.util.stream.Collectors;
 
 @Service
 public class BookService {
-    private final MemberRepository memberRepository;
+
     private final CategoryRepository categoryRepository;
     private final BookRepository bookRepository;
 
-    public BookService(MemberRepository memberRepository,
-                       CategoryRepository categoryRepository,
-                       BookRepository bookRepository) {
-        this.memberRepository = memberRepository;
+    private final UserService userService;
+
+    public BookService(CategoryRepository categoryRepository,
+                       BookRepository bookRepository,
+                       UserService userService) {
+
         this.categoryRepository = categoryRepository;
         this.bookRepository = bookRepository;
+        this.userService = userService;
     }
+
 
 
     //책 삭제 후 해당 리스트 반환
     @Transactional
     public List<BookDto> BookDelete(BookDto bookDto) {
-        // 현재 사용자의 이메일을 가져오기
+      /*  // 현재 사용자의 이메일을 가져오기
         String currentUserEmail = SecurityUtil.getCurrentEmail()
                 .orElseThrow(() -> new RuntimeException("현재 사용자의 이메일을 찾을 수 없습니다."));
 
         // 이메일로 회원 정보 조회
         Member member = memberRepository.findOneWithAuthoritiesByEmail(currentUserEmail)
-                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));*/
+
+        Member member = userService.GetCurrentMmember();
 
         // 삭제할 도서가 속한 카테고리 찾기
         Category categoryToUpdate = member.getCategories().stream()
@@ -73,12 +79,14 @@ public class BookService {
     //enum타입 카테고리 dto 받아서 책 목록 반환하는 식으로 해야할듯
     @Transactional(readOnly = true)
     public List<BookDto> BookList(BookListDto bookListDto) {
-        String currentUserEmail = SecurityUtil.getCurrentEmail()
+        /*String currentUserEmail = SecurityUtil.getCurrentEmail()
                 .orElseThrow(() -> new RuntimeException("현재 사용자의 이메일을 찾을 수 없습니다."));
 
         Member member = memberRepository.findOneWithAuthoritiesByEmail(currentUserEmail)
                 .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
+*/
 
+        Member member = userService.GetCurrentMmember();
         Category categoryToUpdate = member.getCategories().stream()
                 .filter(category -> category.getCategoryName().equals(bookListDto.getCategoryName()))
                 .findFirst()
@@ -100,14 +108,16 @@ public class BookService {
     //도서 저장
     @Transactional
     public BookDto BookSave(BookDto bookdto) {
-        String currentUserEmail = SecurityUtil.getCurrentEmail()
+        /*String currentUserEmail = SecurityUtil.getCurrentEmail()
                 .orElseThrow(() -> new RuntimeException("현재 사용자의 이메일을 찾을 수 없습니다."));
 
         Member member = memberRepository.findOneWithAuthoritiesByEmail(currentUserEmail)
                 .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
-
+*/
         //기존 enum 타입이 존재하는 경우랑 안하는 경우랑 다르게 처리해야 할거 같음
         // 다음부턴 일케 짜지 말자 개귀찮네
+
+        Member member = userService.GetCurrentMmember();
 
 
 
