@@ -69,7 +69,7 @@ public class SecurityConfig {
                         .requestMatchers("/swagger", "/swagger-ui.html", "/swagger-ui/**", "/api-docs", "/api-docs/**", "/v3/api-docs/**")
                         .permitAll()
                         .requestMatchers("/api/hello", "/api/authenticate", "/api/signup").permitAll()//위 3가지는 허용
-                        .requestMatchers(PathRequest.toH2Console()).permitAll()
+/*                        .requestMatchers(PathRequest.toH2Console()).permitAll()*/
                         .anyRequest().authenticated()//나머지 요청들은 모두 인증을 받아야 한다
                 )
 
@@ -79,9 +79,11 @@ public class SecurityConfig {
                 )
 
                 // enable h2-console
-                .headers(headers ->
+/*                .headers(headers ->
                         headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)
-                )
+                )*/
+
+//                이 부분 블로그에 작성하기!!!!!
 
                 .with(new JwtSecurityConfig(tokenProvider), customizer -> {});
         return http.build();
