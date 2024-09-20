@@ -9,10 +9,14 @@ spring:
       mode: always
   jpa:
 
-    hibernate:
-      ddl-auto: update
-      #https://giron.tistory.com/128
+    #hibernate:
+    #  ddl-auto: update
+
+    #이유 찾아보기
+    #https://giron.tistory.com/128
     properties:
+      hibernate.hbm2ddl.auto: update
+      #이유 찾아보기
       hibernate.dialect: org.hibernate.dialect.MySQLDialect
       hibernate:
         format_sql: true
