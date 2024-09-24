@@ -16,6 +16,9 @@ configurations {
 		extendsFrom annotationProcessor
 	}
 }
+bootJar {
+	mainClass = 'com.example.ExampleApplication'
+}
 
 repositories {
 	mavenCentral()

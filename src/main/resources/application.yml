@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/newdb?useSSL=false&serverTimezone=Asia/Seoul
+    url: jdbc:mysql://database-1.cn0gu4wqaabh.ap-northeast-2.rds.amazonaws.com:3306/testdb?useSSL=false&serverTimezone=Asia/Seoul
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: 1234
+    username: admin
+    password: gjwlswls
   sql:
     init:
       mode: always
@@ -15,7 +15,7 @@ spring:
     #이유 찾아보기
     #https://giron.tistory.com/128
     properties:
-      hibernate.hbm2ddl.auto: update
+      hibernate.hbm2ddl.auto: create-drop
       #이유 찾아보기
       hibernate.dialect: org.hibernate.dialect.MySQLDialect
       hibernate:
