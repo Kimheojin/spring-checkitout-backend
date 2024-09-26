@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class MemberDto {
 
     @NotNull
-    @Size(min = 3, max = 50)
+    @Size(min = 1, max = 50)
     private String membername;
 
     //객체를 직렬화시 포함 X

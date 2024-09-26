@@ -17,7 +17,7 @@ configurations {
 	}
 }
 bootJar {
-	mainClass = 'com.example.ExampleApplication'
+	mainClass = 'hongik.demo_book.DemoBookApplication'
 }
 
 repositories {
