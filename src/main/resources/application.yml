@@ -1,23 +1,26 @@
 spring:
   datasource:
-    url: jdbc:mysql://testdb.cn0gu4wqaabh.ap-northeast-2.rds.amazonaws.com:3306/testdb?useSSL=false&serverTimezone=Asia/Seoul
+    url: jdbc:mysql://testdb.cn0gu4wqaabh.ap-northeast-2.rds.amazonaws.com:3306/testdb?useSSL=true&serverTimezone=Asia/Seoul
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: admin
     password: gjwlswls
-  sql:
-    init:
-      mode: always
+
+#  sql:
+#    init:
+#      mode: always
+  ## import.sql 관련 설정
   jpa:
 
-    #hibernate:
-    #  ddl-auto: update
+
+    hibernate:
+      ddl-auto: validate
 
     #이유 찾아보기
     #https://giron.tistory.com/128
     properties:
-      hibernate.hbm2ddl.auto: create-drop
+
       #이유 찾아보기
-      hibernate.dialect: org.hibernate.dialect.MySQLDialect
+      hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
       hibernate:
         format_sql: true
         show_sql: true
