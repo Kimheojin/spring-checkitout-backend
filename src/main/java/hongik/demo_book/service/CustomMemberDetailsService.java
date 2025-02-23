@@ -2,6 +2,7 @@ package hongik.demo_book.service;
 
 import hongik.demo_book.Repository.MemberRepository;
 import hongik.demo_book.domain.Member;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,12 +15,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component("memberDetailsService")
+@RequiredArgsConstructor
 public class CustomMemberDetailsService implements UserDetailsService {
     private final MemberRepository memberRepository;
-
-    public CustomMemberDetailsService(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
 
     @Override
     @Transactional

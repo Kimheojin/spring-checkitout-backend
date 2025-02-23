@@ -7,6 +7,7 @@ import hongik.demo_book.domain.Library;
 import hongik.demo_book.domain.Member;
 import hongik.demo_book.dto.LibraryDto;
 import hongik.demo_book.util.SecurityUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,19 +15,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class LibraryService {
 
     private final LibraryRepository libraryRepository;
     private final UserService userService;
-
-    public LibraryService(LibraryRepository libraryRepository,
-                          UserService userService) {
-
-        this.libraryRepository = libraryRepository;
-        this.userService = userService;
-    }
-
-
 
 
     //도서관 저장

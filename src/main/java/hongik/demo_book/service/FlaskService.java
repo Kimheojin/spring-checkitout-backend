@@ -6,6 +6,7 @@ import hongik.demo_book.domain.CategoryName;
 import hongik.demo_book.dto.BookDto;
 import hongik.demo_book.dto.RcdRequestDto;
 import hongik.demo_book.dto.RcdReturnDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,21 +15,12 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class FlaskService {
 
 
     private final BookService bookService;
     private final ObjectMapper objectMapper;
-
-
-
-    public FlaskService(BookService bookService, ObjectMapper objectMapper) {
-        this.bookService = bookService;
-        this.objectMapper = objectMapper;
-
-    }
-
-
 
 
     @Transactional

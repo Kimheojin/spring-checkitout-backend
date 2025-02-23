@@ -10,6 +10,7 @@ import hongik.demo_book.dto.MemberDto;
 import hongik.demo_book.exception.DuplicateMemberException;
 import hongik.demo_book.exception.NotFoundMemberException;
 import hongik.demo_book.util.SecurityUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,21 +18,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
 
 @Service
+@RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
-    public MemberService(MemberRepository memberRepository,
-                         PasswordEncoder passwordEncoder,
-                         UserService userService) {
-        this.memberRepository = memberRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.userService = userService;
-    }
-
-
-
-
     @Transactional
     public MemberDto signup(MemberDto memberDto) {
         if (memberRepository.findOneWithAuthoritiesByEmail(memberDto.getEmail()).orElse(null) != null) {

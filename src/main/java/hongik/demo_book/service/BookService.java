@@ -10,6 +10,7 @@ import hongik.demo_book.domain.Member;
 import hongik.demo_book.dto.BookDto;
 import hongik.demo_book.dto.BookListDto;
 import hongik.demo_book.util.SecurityUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,22 +18,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class BookService {
 
     private final CategoryRepository categoryRepository;
     private final BookRepository bookRepository;
 
     private final UserService userService;
-
-    public BookService(CategoryRepository categoryRepository,
-                       BookRepository bookRepository,
-                       UserService userService) {
-
-        this.categoryRepository = categoryRepository;
-        this.bookRepository = bookRepository;
-        this.userService = userService;
-    }
-
 
 
     //책 삭제 후 해당 리스트 반환
@@ -108,14 +100,6 @@ public class BookService {
     //도서 저장
     @Transactional
     public BookDto BookSave(BookDto bookdto) {
-        /*String currentUserEmail = SecurityUtil.getCurrentEmail()
-                .orElseThrow(() -> new RuntimeException("현재 사용자의 이메일을 찾을 수 없습니다."));
-
-        Member member = memberRepository.findOneWithAuthoritiesByEmail(currentUserEmail)
-                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
-*/
-        //기존 enum 타입이 존재하는 경우랑 안하는 경우랑 다르게 처리해야 할거 같음
-        // 다음부턴 일케 짜지 말자 개귀찮네
 
         Member member = userService.GetCurrentMmember();
 
