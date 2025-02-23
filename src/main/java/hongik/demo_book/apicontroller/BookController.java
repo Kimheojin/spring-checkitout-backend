@@ -8,7 +8,6 @@ import hongik.demo_book.domain.CategoryName;
 import hongik.demo_book.dto.BookDto;
 import hongik.demo_book.dto.BookListDto;
 import hongik.demo_book.service.BookService;
-import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -31,7 +30,7 @@ public class BookController {
     }
 
     //도서 저장
-    @Operation(summary = "책 저장기능", description = "isbn13, categoryname 보내주면 저장")
+
     @PostMapping("/member/bookSave")
     @PreAuthorize("hasAnyRole('USER')")
     public ResponseEntity<BookDto> saveMemberBook(
@@ -50,7 +49,7 @@ public class BookController {
         return ResponseEntity.ok(bookService.BookList(bookListDto));
     }*/
 
-    @Operation(summary = "책 리스트 반환기능", description = "categoryname 보내주면 해당 카테고리 리스트 반환")
+
     @GetMapping("/member/bookList")
     @PreAuthorize("hasAnyRole('USER')")
     public ResponseEntity<List<BookDto>> MemberBookList(
@@ -72,7 +71,7 @@ public class BookController {
 
 
     //도서 삭제
-    @Operation(summary = "책 삭제 기능", description = "isbn13, categoryname 보내주면 삭제")
+
     @DeleteMapping("/member/bookDelete")
     @PreAuthorize("hasAnyRole('USER')")
     public ResponseEntity<List<BookDto>> MemberBookDelete(

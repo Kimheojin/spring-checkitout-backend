@@ -66,8 +66,8 @@ public class SecurityConfig {
                 //h2 데이터베이스 허용//httprequests -> 접근에 대한 요청에 대한 설정
                 //이거 순서도 은근 중요한듯
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                        .requestMatchers("/swagger", "/swagger-ui.html", "/swagger-ui/**", "/api-docs", "/api-docs/**", "/v3/api-docs/**")
-                        .permitAll()
+
+
                         .requestMatchers("/api/hello", "/api/authenticate", "/api/signup").permitAll()//위 3가지는 허용
 /*                        .requestMatchers(PathRequest.toH2Console()).permitAll()*/
                         .anyRequest().authenticated()//나머지 요청들은 모두 인증을 받아야 한다
