@@ -9,6 +9,7 @@ import hongik.demo_book.dto.BookDto;
 import hongik.demo_book.dto.BookListDto;
 import hongik.demo_book.service.BookService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class BookController {
 
     //도서 저장
@@ -25,12 +27,7 @@ public class BookController {
     //도서 삭제(리스트로 하는게 좋을듯)
     private final BookService bookService;
 
-    public BookController(BookService bookService){
-        this.bookService = bookService;
-    }
-
     //도서 저장
-
     @PostMapping("/member/bookSave")
     @PreAuthorize("hasAnyRole('USER')")
     public ResponseEntity<BookDto> saveMemberBook(
@@ -38,17 +35,6 @@ public class BookController {
     ){
         return ResponseEntity.ok(bookService.BookSave(bookdto));
     }
-
-    //도서 목록 반환(enum타입 별로)
-/*    @Operation(summary = "책 리스트 반환기능", description = "categoryname 보내주면 해당 카테고리 리스트 반환")
-    @GetMapping("/member/bookList")
-    @PreAuthorize("hasAnyRole('USER')")
-    public ResponseEntity<List<BookDto>> MemberBookList(
-            @Valid @RequestBody BookListDto bookListDto
-    ){
-        return ResponseEntity.ok(bookService.BookList(bookListDto));
-    }*/
-
 
     @GetMapping("/member/bookList")
     @PreAuthorize("hasAnyRole('USER')")

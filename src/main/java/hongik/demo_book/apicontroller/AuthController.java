@@ -5,6 +5,7 @@ import hongik.demo_book.dto.TokenDto;
 import hongik.demo_book.jwt.JwtFilter;
 import hongik.demo_book.jwt.TokenProvider;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class AuthController {
     private final TokenProvider tokenProvider;
     //jwt token 생성하는 데 사용
@@ -26,11 +28,7 @@ public class AuthController {
 
     //security 내장
 
-    public AuthController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
-        this.tokenProvider = tokenProvider;
-        this.authenticationManagerBuilder = authenticationManagerBuilder;
 
-    }
 
     //로그인기능 -> 성공시 바디부랑 header부 둘 다 token정보 반환
 

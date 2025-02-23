@@ -5,6 +5,7 @@ import hongik.demo_book.dto.LibraryDto;
 import hongik.demo_book.service.LibraryService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -13,15 +14,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class LibraryController {
 
-
-
     private final LibraryService libraryService;
-    public LibraryController(LibraryService libraryService, MemberRepository memberRepository) {
-        this.libraryService = libraryService;
 
-    }
 
     //도서관 저장
 
