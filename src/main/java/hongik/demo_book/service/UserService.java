@@ -11,15 +11,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
 
-
     private final MemberRepository memberRepository;
-
-
 
     public Member GetCurrentMmember() {
         String currentUserEmail = SecurityUtil.getCurrentEmail()
                 .orElseThrow(() -> new RuntimeException("현재 사용자의 이메일을 찾을 수 없습니다."));
-
 
         return memberRepository.findOneWithAuthoritiesByEmail(currentUserEmail)
                 .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));

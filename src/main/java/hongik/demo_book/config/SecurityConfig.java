@@ -5,6 +5,7 @@ import hongik.demo_book.jwt.JwtAccessDeniedHandler;
 import hongik.demo_book.jwt.JwtAuthenticationEntryPoint;
 import hongik.demo_book.jwt.JwtSecurityConfig;
 import hongik.demo_book.jwt.TokenProvider;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,24 +26,14 @@ import org.springframework.web.filter.CorsFilter;
 @EnableWebSecurity//기본적인 웹 보안 활성화 위해
 @EnableMethodSecurity
 @Configuration
-//강의랑 조금 다르게함
+@RequiredArgsConstructor
 public class SecurityConfig {
     private final TokenProvider tokenProvider;
     private final CorsFilter corsFilter;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
-    public SecurityConfig(
-            TokenProvider tokenProvider,
-            CorsFilter corsFilter,
-            JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
-            JwtAccessDeniedHandler jwtAccessDeniedHandler
-    ) {
-        this.tokenProvider = tokenProvider;
-        this.corsFilter = corsFilter;
-        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
-        this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
-    }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -73,17 +64,12 @@ public class SecurityConfig {
                         .anyRequest().authenticated()//나머지 요청들은 모두 인증을 받아야 한다
                 )
 
-                // 세션을 사용하지 않기 때문에 STATELESS로 설정
+                // 세션을 X -> stateless로
                 .sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
 
-                // enable h2-console
-/*                .headers(headers ->
-                        headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)
-                )*/
 
-//                이 부분 블로그에 작성하기!!!!!
 
                 .with(new JwtSecurityConfig(tokenProvider), customizer -> {});
         return http.build();

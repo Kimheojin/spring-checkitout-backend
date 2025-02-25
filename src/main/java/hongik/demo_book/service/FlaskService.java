@@ -25,9 +25,6 @@ public class FlaskService {
 
     @Transactional
     public RcdReturnDto BookRecommend(RcdRequestDto rcdRequestDto) throws JsonProcessingException {
-        //rcdResuestDto를 그대로 플라스크 서버에 보낸 후
-        //현재 member 지정
-
 
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
@@ -55,7 +52,6 @@ public class FlaskService {
                     .isbn13(String.valueOf(isbn13))
                     .categoryName(CategoryName.valueOf("Recommendation"))
                     .build();
-
             // 책 저장
             bookService.BookSave(bookDto);
         });

@@ -25,13 +25,6 @@ public class AuthController {
     private final TokenProvider tokenProvider;
     //jwt token 생성하는 데 사용
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
-
-    //security 내장
-
-
-
-    //로그인기능 -> 성공시 바디부랑 header부 둘 다 token정보 반환
-
     @PostMapping("/authenticate")
     public ResponseEntity<TokenDto> authorize(@Valid @RequestBody LoginDto loginDto) {
 

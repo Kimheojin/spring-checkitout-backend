@@ -14,8 +14,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "member")
-@Getter @Setter
-@Builder
+@Getter
+@Builder @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Member {
@@ -33,18 +33,12 @@ public class Member {
     @Email
     private String email;
 
-
-
     @Column(length = 100)
     private String password;
-
     @Temporal(TemporalType.TIMESTAMP)
     private Date join_time;
-
     @Embedded
     private Address address;
-
-
 
 //활성화 여부
     @Column(name = "activated")
