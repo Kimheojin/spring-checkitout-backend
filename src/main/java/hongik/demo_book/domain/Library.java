@@ -8,7 +8,7 @@ import lombok.Setter;
 
 //즐겨찾기한 도서관 목록
 @Entity
-@Getter @Setter
+@Getter
 @NoArgsConstructor//기본 생성자 entity 사용하는 경우 반드시 작성하기
 public class Library {
     @Id
@@ -25,9 +25,6 @@ public class Library {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
-
-
-
 
     public void setMember(Member member) {
         this.member = member;

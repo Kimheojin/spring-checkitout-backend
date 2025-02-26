@@ -33,8 +33,6 @@ public class SecurityConfig {
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
-
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -55,7 +53,7 @@ public class SecurityConfig {
 
 
                 //h2 데이터베이스 허용//httprequests -> 접근에 대한 요청에 대한 설정
-                //이거 순서도 은근 중요한듯
+                //순서 중요
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
 
 

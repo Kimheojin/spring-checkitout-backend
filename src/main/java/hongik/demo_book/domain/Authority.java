@@ -9,10 +9,9 @@ import lombok.*;
 @Entity
 @Table(name = "authority")
 @Getter
-@Setter
 @Builder
-@AllArgsConstructor//모든 필드값을 생성자에서 받아들임
-@NoArgsConstructor//파리미터가 없는 디폴트 생성자
+@AllArgsConstructor
+@NoArgsConstructor
 public class Authority {
 
     @Id

@@ -1,4 +1,4 @@
-package hongik.demo_book.Handler;
+package hongik.demo_book.handler;
 
 import hongik.demo_book.dto.ErrorDto;
 import hongik.demo_book.exception.DuplicateMemberException;

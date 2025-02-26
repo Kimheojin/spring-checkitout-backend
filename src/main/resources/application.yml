@@ -7,13 +7,8 @@ spring:
     username: root
     password: 1234
 
-  sql:
-    init:
-      mode: always
-  ## import.sql 관련 설정
+
   jpa:
-
-
     hibernate:
       ddl-auto: create
 

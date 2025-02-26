@@ -10,7 +10,6 @@ import lombok.Setter;
 @Embeddable
 //member entity에 종속
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Address {

@@ -7,15 +7,12 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "member")
 @Getter
-@Builder @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Member {
@@ -35,8 +32,7 @@ public class Member {
 
     @Column(length = 100)
     private String password;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date join_time;
+
     @Embedded
     private Address address;
 
@@ -54,12 +50,9 @@ public class Member {
     @Builder.Default
     private List<Library> librarys = new ArrayList<>();
 
-    //관계를 1대다 다대1로 새로 매핑(authority랑)
-    @ManyToMany
-    @JoinTable(
-            name = "member_authority",
-            joinColumns = {@JoinColumn(name = "member_id", referencedColumnName = "member_id")},
-            inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
-    private Set<Authority> authorities;
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private Set<MemberAuthority> memberAuthorities = new HashSet<>();
+
 
 }
