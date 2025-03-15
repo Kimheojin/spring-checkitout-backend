@@ -3,7 +3,6 @@ package hongik.demo_book.dto;
 import lombok.*;
 
 @Getter
-@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

@@ -6,10 +6,7 @@ package hongik.demo_book.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +16,7 @@ import static jakarta.persistence.FetchType.LAZY;
 
 @Getter
 @Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "category")
@@ -47,13 +45,5 @@ public class Category {
         this.member = member;
         member.getCategories().add(this);
     }
-
-    //생성 메소드
-    public static Category createcategory(Member member) {
-        Category category = new Category();
-        category.setMember(member);
-        return category;
-    }
-
 
 }

@@ -13,25 +13,19 @@ spring:
       ddl-auto: create
 
     #이유 찾아보기
-    #https://giron.tistory.com/128
     properties:
-
       #이유 찾아보기
       hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
       hibernate:
         format_sql: true
         show_sql: true
     defer-datasource-initialization: true
-
 logging:
   level:
     demo_book: DEBUG
-
 jwt:
   header: Authorization
-  #HS512 알고리즘을 사용할 것이기 때문에 512bit, 즉 64byte 이상의 secret key를 사용해야 한다.
-  #해시 변환된 값은 복호화 못하는듯
-  #echo 'silvernine-tech-spring-boot-jwt-tutorial-secret-silvernine-tech-spring-boot-jwt-tutorial-secret'|base64
+
   secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
   token-validity-in-seconds: 86400
-  #86400 -> 시간 값
+  #초단위 -> 86400 -> 60 60 24 -> 하루

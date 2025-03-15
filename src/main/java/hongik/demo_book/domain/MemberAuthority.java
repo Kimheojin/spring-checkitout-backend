@@ -4,10 +4,12 @@ package hongik.demo_book.domain;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
+@Getter
 @Builder @AllArgsConstructor
 @Table(name = "member_authority")
 public class MemberAuthority {

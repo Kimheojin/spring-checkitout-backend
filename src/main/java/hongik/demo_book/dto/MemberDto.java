@@ -43,8 +43,11 @@ public class MemberDto {
         return MemberDto.builder()
                 .membername(member.getMembername())
                 .email(member.getEmail())
-                .authorityDtoSet(member.getAuthorities().stream()
-                        .map(authority -> AuthorityDto.builder().authorityName(authority.getAuthorityName()).build())
+                .authorityDtoSet(member.getMemberAuthorities().stream()
+                        .map(authority -> AuthorityDto
+                                .builder()
+                                .authorityName(authority.getAuthority().getAuthorityName())
+                                .build())
                         .collect(Collectors.toSet()))
                 .build();
     }

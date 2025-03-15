@@ -55,4 +55,8 @@ public class Member {
     private Set<MemberAuthority> memberAuthorities = new HashSet<>();
 
 
+    //address update 관련
+    public void updateAddress(Address address) {
+        this.address = address;
+    }
 }

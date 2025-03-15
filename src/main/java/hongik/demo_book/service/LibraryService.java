@@ -20,23 +20,21 @@ public class LibraryService {
 
     private final LibraryRepository libraryRepository;
     private final UserService userService;
-
-
     //도서관 저장
     @Transactional
     public LibraryDto LibrarySave(LibraryDto libraryDto) {
 
         Member member = userService.GetCurrentMmember();
         //status에 따라 저장하기
-        Library library = new Library();
+        Library library = Library.builder()
+                .library_status(libraryDto.getLibrary_status())
+                .library_code(libraryDto.getLibrary_code())
+                .member(member)
+                .build();
 
-        library.setLibrary_code(libraryDto.getLibrary_code());
-        library.setLibrary_status(libraryDto.getLibrary_status());
-        library.setMember(member);
         libraryRepository.save(library);
 
         return new LibraryDto(library.getLibrary_code(), library.getLibrary_status());
-
 
     }
 

@@ -22,9 +22,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookController {
 
-    //도서 저장
-    //도서 목록 반환(enum 별로 )
-    //도서 삭제(리스트로 하는게 좋을듯)
     private final BookService bookService;
 
     //도서 저장

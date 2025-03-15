@@ -20,7 +20,7 @@ public class CustomMemberDetailsService implements UserDetailsService {
     private final MemberRepository memberRepository;
 
     @Override
-    @Transactional
+    @Transactional // username 대신 email로
     public UserDetails loadUserByUsername(final String email) {
         return memberRepository.findOneWithAuthoritiesByEmail(email)  // 이메일로 사용자 정보 검색
                 .map(member -> createMember(email, member))
@@ -32,8 +32,11 @@ public class CustomMemberDetailsService implements UserDetailsService {
             throw new RuntimeException(email + " -> 활성화되어 있지 않습니다.");
         }
 
-        List<GrantedAuthority> grantedAuthorities = member.getAuthorities().stream()
-                .map(authority -> new SimpleGrantedAuthority(authority.getAuthorityName()))
+
+        List<GrantedAuthority> grantedAuthorities = member.getMemberAuthorities().stream()
+                .map(memberAuthority -> new SimpleGrantedAuthority(memberAuthority
+                        .getAuthority()
+                        .getAuthorityName()))
                 .collect(Collectors.toList());
 
         return new org.springframework.security.core.userdetails.User(member.getEmail(),

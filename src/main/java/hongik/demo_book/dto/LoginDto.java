@@ -8,7 +8,6 @@ import lombok.*;
 
 //나중에 수정해야할듯
 @Getter
-@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

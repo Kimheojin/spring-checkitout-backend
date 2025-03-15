@@ -5,7 +5,6 @@ import hongik.demo_book.domain.CategoryName;
 import lombok.*;
 
 @Getter
-@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

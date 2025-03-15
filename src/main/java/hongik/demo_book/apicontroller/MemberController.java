@@ -80,7 +80,7 @@ public class MemberController {
     @DeleteMapping("/member/addressDelete")
     @PreAuthorize("hasAnyRole('USER')")
     public ResponseEntity<AddressDto> deleteMemberAddress(HttpServletRequest request) {
-        memberService.AddressDelete();
+        memberService.deleteAddress();
         return ResponseEntity.noContent().build();
     }
 

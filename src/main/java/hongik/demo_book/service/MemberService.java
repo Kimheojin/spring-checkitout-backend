@@ -1,10 +1,12 @@
 package hongik.demo_book.service;
 
 
+import hongik.demo_book.Repository.AuthorityRepository;
 import hongik.demo_book.Repository.MemberRepository;
 import hongik.demo_book.domain.Address;
 import hongik.demo_book.domain.Authority;
 import hongik.demo_book.domain.Member;
+import hongik.demo_book.domain.MemberAuthority;
 import hongik.demo_book.dto.AddressDto;
 import hongik.demo_book.dto.MemberDto;
 import hongik.demo_book.exception.DuplicateMemberException;
@@ -23,21 +25,25 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
+    private final AuthorityRepository authorityRepository;
     @Transactional
     public MemberDto signup(MemberDto memberDto) {
         if (memberRepository.findOneWithAuthoritiesByEmail(memberDto.getEmail()).orElse(null) != null) {
             throw new DuplicateMemberException("이미 가입되어 있는 유저입니다.");
         }
 
-        Authority authority = Authority.builder()
-                .authorityName("ROLE_USER")
-                .build();
+        Authority authority = authorityRepository.findByAuthorityName("ROLE_USER").orElseThrow(
+                () -> new RuntimeException("기본 권한을 찾을 수 없습니다."));
+
+        MemberAuthority memberAuthority = MemberAuthority.builder()
+                .authority(authority).build();
 
         Member member = Member.builder()
                 .membername(memberDto.getMembername())
                 .password(passwordEncoder.encode(memberDto.getPassword()))
                 .email(memberDto.getEmail())
-                .authorities(Collections.singleton(authority))
+                .memberAuthorities(Collections.singleton(memberAuthority))
+                //List인 경우는 singletonList
                 .activated(true)
                 .build();
 
@@ -66,41 +72,36 @@ public class MemberService {
 
         Member member = userService.GetCurrentMmember();
 
-        Address address = new Address();
+        Address address = Address.builder()
+                .city(addressdto.getCity())
+                .street(addressdto.getStreet())
+                .zipcode(addressdto.getZipcode())
+                .build();
 
-        address.setZipcode(addressdto.getZipcode());
-        address.setCity(addressdto.getCity());
-        address.setStreet(addressdto.getStreet());
-
-        member.setAddress(address);
-
-        memberRepository.save(member);
+        member.updateAddress(address);
 
         Address savedAddress = member.getAddress();
-        AddressDto savedAddressDto = new AddressDto();
-        savedAddressDto.setZipcode(savedAddress.getZipcode());
-        savedAddressDto.setCity(savedAddress.getCity());
-        savedAddressDto.setStreet(savedAddress.getStreet());
 
-        return savedAddressDto;
+        return AddressDto.builder()
+                .city(savedAddress.getCity())
+                .street(savedAddress.getStreet())
+                .zipcode(savedAddress.getZipcode())
+                .build();
     }
 
 
     //주소 삭제
     @Transactional
-    public void AddressDelete() {
+    public void deleteAddress() {
 
         Member member = userService.GetCurrentMmember();
 
-        Address currentAdddress = member.getAddress();
+        Address currentAddress = member.getAddress();
 
-        if(currentAdddress == null){
+        if(currentAddress == null){
             throw new RuntimeException("주소가 설정되어있지 않습니다");
         }
-
-        member.setAddress(null);
-        memberRepository.save(member);
-
+        member.updateAddress(null);
 
     }
 
@@ -108,13 +109,11 @@ public class MemberService {
     @Transactional(readOnly = true)
     public AddressDto AddressReturn(){
 
-        Member member = userService.GetCurrentMmember();
-
-
+        Address address = userService.GetCurrentMmember().getAddress();
         return AddressDto.builder()
-                .zipcode(member.getAddress().getZipcode())
-                .street(member.getAddress().getStreet())
-                .city(member.getAddress().getCity())
+                .zipcode(address.getZipcode())
+                .street(address.getZipcode())
+                .city(address.getZipcode())
                 .build();
     }
 }
