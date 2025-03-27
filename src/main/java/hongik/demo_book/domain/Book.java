@@ -2,10 +2,7 @@ package hongik.demo_book.domain;
 
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,6 +11,8 @@ import java.util.List;
 @Entity
 @Table(name = "books")
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class Book {
 
@@ -37,11 +36,6 @@ public class Book {
     }
 
     //생성 메소드
-    public static Book createbook(Category category) {
-        Book book = new Book();
-        book.setCategory(category);
-        return book;
-    }
 
 
 }

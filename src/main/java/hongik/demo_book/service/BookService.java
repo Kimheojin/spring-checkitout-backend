@@ -3,13 +3,11 @@ package hongik.demo_book.service;
 
 import hongik.demo_book.Repository.BookRepository;
 import hongik.demo_book.Repository.CategoryRepository;
-import hongik.demo_book.Repository.MemberRepository;
 import hongik.demo_book.domain.Book;
 import hongik.demo_book.domain.Category;
 import hongik.demo_book.domain.Member;
 import hongik.demo_book.dto.BookDto;
 import hongik.demo_book.dto.BookListDto;
-import hongik.demo_book.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -98,27 +96,25 @@ public class BookService {
                 .orElse(null);
 
         if (categoryToUpdate == null) {
-            categoryToUpdate = new Category();
-            categoryToUpdate.setCategoryName(bookdto.getCategoryName());
+            categoryToUpdate= Category.builder()
+                    .categoryName(bookdto.getCategoryName())
+                    .build();
+
             categoryToUpdate.setMember(member);
+
             categoryRepository.save(categoryToUpdate);
-            member.getCategories().add(categoryToUpdate); // 사용자의 카테고리 목록에 추가
         }
 
-        Book book = new Book();
+        Book book = Book.builder()
+                .isbn13(bookdto.getIsbn13())
+                .build();
         book.setCategory(categoryToUpdate);
-        book.setIsbn13(bookdto.getIsbn13());
 
         bookRepository.save(book);
 
         // BookDto를 반환
-
         return new BookDto(book.getIsbn13(), book.getCategory().getCategoryName());
 
-
-        //카테고리 저장하고 해야할듯 개귀찬은데
-
-        //카테고리별로 기능 구현 해야하나?
 
     }
 }

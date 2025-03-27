@@ -20,7 +20,6 @@ public class FlaskController {
 
     private final FlaskService flaskService;
 
-
     //책 받으면 책 정보 저장하고 반환 하는 형태로 하자
     @PostMapping("/member/Recommendation")
     @PreAuthorize("hasAnyRole('USER')")

@@ -1,6 +1,5 @@
 package hongik.demo_book.apicontroller;
 
-import hongik.demo_book.Repository.MemberRepository;
 import hongik.demo_book.dto.LibraryDto;
 import hongik.demo_book.service.LibraryService;
 import jakarta.servlet.http.HttpServletRequest;

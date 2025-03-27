@@ -2,11 +2,9 @@ package hongik.demo_book.service;
 
 
 import hongik.demo_book.Repository.LibraryRepository;
-import hongik.demo_book.Repository.MemberRepository;
 import hongik.demo_book.domain.Library;
 import hongik.demo_book.domain.Member;
 import hongik.demo_book.dto.LibraryDto;
-import hongik.demo_book.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
