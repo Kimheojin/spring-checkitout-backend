@@ -66,7 +66,7 @@ public class MemberController {
     //주소 저장(구현 완료)
     //주소 변경
 
-    @PostMapping("/member/addressSave")
+    @PostMapping("/member/address")
     @PreAuthorize("hasAnyRole('USER')")
     public ResponseEntity<AddressDto> saveMemberAddress(
             @Valid @RequestBody AddressDto addressdto
@@ -77,7 +77,7 @@ public class MemberController {
 
     //주소 삭제
 
-    @DeleteMapping("/member/addressDelete")
+    @DeleteMapping("/member/address")
     @PreAuthorize("hasAnyRole('USER')")
     public ResponseEntity<AddressDto> deleteMemberAddress(HttpServletRequest request) {
         memberService.deleteAddress();
@@ -86,7 +86,7 @@ public class MemberController {
 
     //저장된 주소 반환
 
-    @GetMapping("/member/addressReturn")
+    @GetMapping("/member/address")
     @PreAuthorize("hasAnyRole('USER')")
     public ResponseEntity<AddressDto> returnMemberAddress(HttpServletRequest request){
         return ResponseEntity.ok(memberService.AddressReturn());

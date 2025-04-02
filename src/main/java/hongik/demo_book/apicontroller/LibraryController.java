@@ -18,7 +18,7 @@ public class LibraryController {
 
     private final LibraryService libraryService;
     //도서관 저장
-    @PostMapping("/member/librarySave")
+    @PostMapping("/member/librarys")
     @PreAuthorize("hasAnyRole('USER')")
     public ResponseEntity<LibraryDto> saveMEmberLibrary(
             @Valid @RequestBody LibraryDto libraryDto
@@ -28,7 +28,7 @@ public class LibraryController {
     //도서관 삭제
     //현재 저장된 도서관 목록 반환
 
-    @DeleteMapping("/member/libraryDelete")
+    @DeleteMapping("/member/librarys")
     @PreAuthorize("hasAnyRole('USER')")
     public ResponseEntity<List<LibraryDto>> deleteMemberLibrary(
             @Valid @RequestBody LibraryDto libraryDto
@@ -37,7 +37,7 @@ public class LibraryController {
     }
 
 
-    @GetMapping("/member/libraryReturn")
+    @GetMapping("/member/librarys")
     @PreAuthorize("hasAnyRole('USER')")
     public ResponseEntity<List<LibraryDto>> returnMemberLibrary(HttpServletRequest request){
         return ResponseEntity.ok(libraryService.LibraryList());

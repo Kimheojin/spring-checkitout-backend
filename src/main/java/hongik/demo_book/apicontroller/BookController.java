@@ -25,7 +25,7 @@ public class BookController {
     private final BookService bookService;
 
     //도서 저장
-    @PostMapping("/member/bookSave")
+    @PostMapping("/member/books")
     @PreAuthorize("hasAnyRole('USER')")
     public ResponseEntity<BookDto> saveMemberBook(
             @Valid @RequestBody BookDto bookdto
@@ -33,7 +33,7 @@ public class BookController {
         return ResponseEntity.ok(bookService.BookSave(bookdto));
     }
 
-    @GetMapping("/member/bookList")
+    @GetMapping("/member/books")
     @PreAuthorize("hasAnyRole('USER')")
     public ResponseEntity<List<BookDto>> MemberBookList(
             @Valid @RequestParam String categoryName
@@ -54,8 +54,7 @@ public class BookController {
 
 
     //도서 삭제
-
-    @DeleteMapping("/member/bookDelete")
+    @DeleteMapping("/member/books")
     @PreAuthorize("hasAnyRole('USER')")
     public ResponseEntity<List<BookDto>> MemberBookDelete(
             @Valid @RequestBody BookDto bookDto
