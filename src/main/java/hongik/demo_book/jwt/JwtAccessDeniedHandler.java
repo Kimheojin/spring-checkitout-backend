@@ -12,10 +12,13 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
+
+// 필터 단 예외 handler
 @Component
 public class JwtAccessDeniedHandler implements AccessDeniedHandler {
     @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException {
+    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException)
+            throws IOException {
         //필터단은 추상화 그게 낮아서 json 직접 생성 필
         response.setStatus(HttpServletResponse.SC_FORBIDDEN); // 403
         response.setContentType("application/json;charset=UTF-8"); // Content-Type 헤더를 설정

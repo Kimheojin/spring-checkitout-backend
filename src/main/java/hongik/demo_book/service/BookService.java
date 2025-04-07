@@ -88,8 +88,6 @@ public class BookService {
 
         Member member = userService.GetCurrentMmember();
 
-
-
         Category categoryToUpdate = member.getCategories().stream()
                 .filter(category -> category.getCategoryName().equals(bookdto.getCategoryName()))
                 .findFirst()

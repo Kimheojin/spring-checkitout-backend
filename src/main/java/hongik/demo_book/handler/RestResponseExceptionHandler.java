@@ -1,7 +1,7 @@
 package hongik.demo_book.handler;
 
 import hongik.demo_book.dto.ErrorDto;
-import hongik.demo_book.exception.DuplicateMemberException;
+import hongik.demo_book.exception.DuplicateMember;
 import hongik.demo_book.exception.NotFoundMemberException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -18,7 +18,7 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 public class RestResponseExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ResponseStatus(CONFLICT)
-    @ExceptionHandler(value = { DuplicateMemberException.class })
+    @ExceptionHandler(value = { DuplicateMember.class })
     @ResponseBody
     protected ErrorDto conflict(RuntimeException ex, WebRequest request) {
         return new ErrorDto(CONFLICT.value(), ex.getMessage());

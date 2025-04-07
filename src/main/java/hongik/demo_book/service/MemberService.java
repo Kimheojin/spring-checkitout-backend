@@ -9,7 +9,7 @@ import hongik.demo_book.domain.Member;
 import hongik.demo_book.domain.MemberAuthority;
 import hongik.demo_book.dto.AddressDto;
 import hongik.demo_book.dto.MemberDto;
-import hongik.demo_book.exception.DuplicateMemberException;
+import hongik.demo_book.exception.DuplicateMember;
 import hongik.demo_book.exception.NotFoundMemberException;
 import hongik.demo_book.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,7 @@ public class MemberService {
     @Transactional
     public MemberDto signup(MemberDto memberDto) {
         if (memberRepository.findOneWithAuthoritiesByEmail(memberDto.getEmail()).orElse(null) != null) {
-            throw new DuplicateMemberException("이미 가입되어 있는 유저입니다.");
+            throw new DuplicateMember();
         }
 
         Authority authority = authorityRepository.findByAuthorityName("ROLE_USER").orElseThrow(

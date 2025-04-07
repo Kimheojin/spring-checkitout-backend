@@ -18,10 +18,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FlaskService {
 
-
     private final BookService bookService;
     private final ObjectMapper objectMapper;
-
 
     @Transactional
     public RcdReturnDto BookRecommend(RcdRequestDto rcdRequestDto) throws JsonProcessingException {
@@ -43,7 +41,6 @@ public class FlaskService {
         RcdReturnDto result = response.getBody();
 
         List<Long> similarBooks = result.getSimilar_books();
-        //그냥 return result 해도 상관 없지 않나
 
         //저장부분 구현하기
         similarBooks.forEach(isbn13 -> {
