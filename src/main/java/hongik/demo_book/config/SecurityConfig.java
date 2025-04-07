@@ -6,6 +6,7 @@ import hongik.demo_book.jwt.JwtAuthenticationEntryPoint;
 import hongik.demo_book.jwt.JwtSecurityConfig;
 import hongik.demo_book.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -54,7 +55,7 @@ public class SecurityConfig {
 
 
                         .requestMatchers("/api/hello", "/api/authenticate", "/api/signup").permitAll()//위 3가지는 허용
-/*                        .requestMatchers(PathRequest.toH2Console()).permitAll()*/
+                        .requestMatchers(PathRequest.toH2Console()).permitAll()
                         .anyRequest().authenticated()//나머지 요청들은 모두 인증을 받아야 한다
                 )
 

@@ -44,7 +44,7 @@ dependencies {
 	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
 
 //	mysql 관련 코드
-	runtimeOnly 'com.mysql:mysql-connector-j'
+/*	runtimeOnly 'com.mysql:mysql-connector-j'*/
 
 	// 쿼리 dsl 의존성 추가
 	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'

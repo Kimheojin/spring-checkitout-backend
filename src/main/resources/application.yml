@@ -1,31 +1,13 @@
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/newdb?useSSL=true&serverTimezone=Asia/Seoul
-    driver-class-name: com.mysql.cj.jdbc.Driver
-#    username: admin
-#    password: gjwlswls
-    username: root
-    password: 1234
+  profiles:
+    active: mysql, dev
 
 
-  jpa:
-    hibernate:
-      ddl-auto: create
-
-    #이유 찾아보기
-    properties:
-      #이유 찾아보기
-      hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
-      hibernate:
-        format_sql: true
-        show_sql: true
-    defer-datasource-initialization: true
 logging:
   level:
     demo_book: DEBUG
+
 jwt:
   header: Authorization
-
   secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
   token-validity-in-seconds: 86400
-  #초단위 -> 86400 -> 60 60 24 -> 하루

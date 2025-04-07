@@ -26,17 +26,15 @@ public class QMember extends EntityPathBase<Member> {
 
     public final QAddress address;
 
-    public final SetPath<Authority, QAuthority> authorities = this.<Authority, QAuthority>createSet("authorities", Authority.class, QAuthority.class, PathInits.DIRECT2);
-
     public final ListPath<Category, QCategory> categories = this.<Category, QCategory>createList("categories", Category.class, QCategory.class, PathInits.DIRECT2);
 
     public final StringPath email = createString("email");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final DateTimePath<java.util.Date> join_time = createDateTime("join_time", java.util.Date.class);
-
     public final ListPath<Library, QLibrary> librarys = this.<Library, QLibrary>createList("librarys", Library.class, QLibrary.class, PathInits.DIRECT2);
+
+    public final SetPath<MemberAuthority, QMemberAuthority> memberAuthorities = this.<MemberAuthority, QMemberAuthority>createSet("memberAuthorities", MemberAuthority.class, QMemberAuthority.class, PathInits.DIRECT2);
 
     public final StringPath membername = createString("membername");
 
