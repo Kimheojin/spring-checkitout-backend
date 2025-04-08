@@ -35,19 +35,24 @@ public class MemberService {
         Authority authority = authorityRepository.findByAuthorityName("ROLE_USER").orElseThrow(
                 () -> new RuntimeException("기본 권한을 찾을 수 없습니다."));
 
-        MemberAuthority memberAuthority = MemberAuthority.builder()
-                .authority(authority).build();
 
         Member member = Member.builder()
                 .membername(memberDto.getMembername())
                 .password(passwordEncoder.encode(memberDto.getPassword()))
                 .email(memberDto.getEmail())
-                .memberAuthorities(Collections.singleton(memberAuthority))
-                //List인 경우는 singletonList
                 .activated(true)
                 .build();
 
-        return MemberDto.from(memberRepository.save(member));
+        member = memberRepository.save(member);
+        MemberAuthority memberAuthority = MemberAuthority.builder()
+                .authority(authority)
+                .member(member)  // Member 설정
+                .build();
+        member.getMemberAuthorities().add(memberAuthority);
+
+        return MemberDto.from(member);
+
+
     }
 
     @Transactional(readOnly = true)
