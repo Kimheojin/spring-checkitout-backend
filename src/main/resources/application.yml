@@ -1,4 +1,9 @@
 spring:
+  profiles:
+    active: dev
+---
+# dev 에만 적용되는 설정
+spring:
   config:
     activate:
       on-profile: dev
