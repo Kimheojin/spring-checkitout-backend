@@ -14,6 +14,6 @@ import java.util.Optional;
 //extends 다음에 객체 명으로 넣기
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    @EntityGraph(attributePaths = "authorities")
+    @EntityGraph(attributePaths = "memberAuthorities")
     Optional<Member> findOneWithAuthoritiesByEmail(String email);
 }
