@@ -28,7 +28,6 @@ public class MemberController {
     }
 
     //토큰 있을시 api/member 로 이동
-
     @PostMapping("/test-redirect")
     public void testRedirect(HttpServletResponse response) throws IOException {
         response.sendRedirect("/api/member");
