@@ -1,6 +1,7 @@
 package hongik.demo_book.config;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import hongik.demo_book.jwt.JwtAccessDeniedHandler;
 import hongik.demo_book.jwt.JwtAuthenticationEntryPoint;
 import hongik.demo_book.jwt.JwtSecurityConfig;
@@ -34,6 +35,13 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    @Bean
+    public ObjectMapper objectMapper() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return  objectMapper;
+    }
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
