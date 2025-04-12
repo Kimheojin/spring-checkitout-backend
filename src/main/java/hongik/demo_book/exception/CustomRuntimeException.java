@@ -16,9 +16,6 @@ public abstract class CustomRuntimeException extends RuntimeException{
         super(message);
     }
 
-    public CustomRuntimeException(String message, Throwable cause) {
-        super(message, cause);
-    }
 
     // 강제 하기 위해
     public abstract int getstatusCode();
