@@ -17,8 +17,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
-
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -66,7 +64,7 @@ public class MemberService {
         return MemberDto.from(
                 SecurityUtil.getCurrentEmail()
                         .flatMap(memberRepository::findOneWithAuthoritiesByEmail)
-                        .orElseThrow(() -> new NotFoundMemberException("Member not found"))
+                        .orElseThrow(() -> new NotFoundMemberException())
         );
     }
 

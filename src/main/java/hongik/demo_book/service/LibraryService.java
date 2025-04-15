@@ -5,6 +5,7 @@ import hongik.demo_book.Repository.LibraryRepository;
 import hongik.demo_book.domain.Library;
 import hongik.demo_book.domain.Member;
 import hongik.demo_book.dto.LibraryDto;
+import hongik.demo_book.exception.NotFounLibrary;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,7 +47,7 @@ public class LibraryService {
                 .filter(library -> library.getLibrary_code().equals(libraryDto.getLibrary_code()))
                 .filter(library -> library.getLibrary_status().equals(libraryDto.getLibrary_status()))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("해당 도서관을 찾을 수 없습니다."));
+                .orElseThrow(() -> new NotFounLibrary());
 
         libraryRepository.delete(libraryToDelete);
 
