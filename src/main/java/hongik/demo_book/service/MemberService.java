@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
-    private final UserService userService;
+    private final CustomUserService customUserService;
     private final AuthorityRepository authorityRepository;
     @Transactional
     public MemberDto signup(MemberDto memberDto) {
@@ -73,7 +73,7 @@ public class MemberService {
     public AddressDto AddressSave(AddressDto addressdto) {
 
 
-        Member member = userService.GetCurrentMmember();
+        Member member = customUserService.GetCurrentMmember();
 
         Address address = Address.builder()
                 .city(addressdto.getCity())
@@ -97,7 +97,7 @@ public class MemberService {
     @Transactional
     public void deleteAddress() {
 
-        Member member = userService.GetCurrentMmember();
+        Member member = customUserService.GetCurrentMmember();
 
         Address currentAddress = member.getAddress();
 
@@ -112,7 +112,7 @@ public class MemberService {
     @Transactional(readOnly = true)
     public AddressDto AddressReturn(){
 
-        Address address = userService.GetCurrentMmember().getAddress();
+        Address address = customUserService.GetCurrentMmember().getAddress();
         return AddressDto.builder()
                 .zipcode(address.getZipcode())
                 .street(address.getZipcode())

@@ -21,7 +21,7 @@ public class BookService {
 
     private final CategoryRepository categoryRepository;
     private final BookRepository bookRepository;
-    private final UserService userService;
+    private final CustomUserService customUserService;
 
 
     //책 삭제 후 해당 리스트 반환
@@ -29,7 +29,7 @@ public class BookService {
     public List<BookDto> BookDelete(BookDto bookDto) {
 
 
-        Member member = userService.GetCurrentMmember();
+        Member member = customUserService.GetCurrentMmember();
 
         // 삭제할 도서가 속한 카테고리 찾기
         Category categoryToUpdate = member.getCategories().stream()
@@ -63,7 +63,7 @@ public class BookService {
     @Transactional(readOnly = true)
     public List<BookDto> BookList(BookListDto bookListDto) {
 
-        Member member = userService.GetCurrentMmember();
+        Member member = customUserService.GetCurrentMmember();
         Category categoryToUpdate = member.getCategories().stream()
                 .filter(category -> category.getCategoryName().equals(bookListDto.getCategoryName()))
                 .findFirst()
@@ -86,7 +86,7 @@ public class BookService {
     @Transactional
     public BookDto BookSave(BookDto bookdto) {
 
-        Member member = userService.GetCurrentMmember();
+        Member member = customUserService.GetCurrentMmember();
 
         Category categoryToUpdate = member.getCategories().stream()
                 .filter(category -> category.getCategoryName().equals(bookdto.getCategoryName()))
