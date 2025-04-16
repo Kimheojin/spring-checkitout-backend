@@ -31,7 +31,10 @@ public class AuthController {
         UsernamePasswordAuthenticationToken authenticationToken =//getMembername -> getEmail (수정)
                 new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword());
 
-        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+        Authentication authentication = authenticationManagerBuilder
+                .getObject()
+                .authenticate(authenticationToken);
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         //토큰 생성

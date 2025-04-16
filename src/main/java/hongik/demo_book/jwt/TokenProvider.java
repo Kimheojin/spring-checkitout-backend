@@ -28,7 +28,7 @@ public class TokenProvider implements InitializingBean {
 
     private static final String AUTHORITIES_KEY = "auth";
     private final String secret;
-    private final long tokenValidityInMilliseconds;
+    private final long tokenValidityInMilliseconds; // ms 처리 필요
     private Key key;
 
     //의존성 주입
