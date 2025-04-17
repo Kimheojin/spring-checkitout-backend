@@ -1,4 +1,4 @@
-package hongik.demo_book.apicontroller;
+package hongik.demo_book.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import hongik.demo_book.dto.RcdRequestDto;

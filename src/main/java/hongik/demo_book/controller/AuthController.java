@@ -1,4 +1,4 @@
-package hongik.demo_book.apicontroller;
+package hongik.demo_book.controller;
 
 import hongik.demo_book.dto.LoginDto;
 import hongik.demo_book.dto.TokenDto;

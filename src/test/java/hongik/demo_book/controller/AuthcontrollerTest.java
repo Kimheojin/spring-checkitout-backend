@@ -1,6 +1,5 @@
-package hongik.demo_book.apicontroller;
+package hongik.demo_book.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hongik.demo_book.config.WithMockBookUser;
 import hongik.demo_book.dto.LoginDto;
@@ -12,12 +11,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -26,6 +23,7 @@ public class AuthcontrollerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    // 필드주입..?
     @Autowired
     private ObjectMapper objectMapper;
 

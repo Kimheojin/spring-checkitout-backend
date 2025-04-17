@@ -1,4 +1,4 @@
-package hongik.demo_book.apicontroller;
+package hongik.demo_book.controller;
 
 
 import hongik.demo_book.config.WithMockBookUser;
@@ -19,11 +19,11 @@ public class MemberControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
-
     @Test
     @DisplayName("/api/hello 요청시 String 형태로 hello 반환")
     void test1() throws Exception {
+
+        // when + then
         mockMvc.perform(get("/api/hello"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("hello"))
