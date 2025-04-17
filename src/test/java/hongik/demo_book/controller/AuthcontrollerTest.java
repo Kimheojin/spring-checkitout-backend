@@ -3,6 +3,7 @@ package hongik.demo_book.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hongik.demo_book.config.WithMockBookUser;
 import hongik.demo_book.dto.LoginDto;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,6 @@ public class AuthcontrollerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    // 필드주입..?
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -42,12 +42,17 @@ public class AuthcontrollerTest {
                 .password("champsWinnerChelsea")
                 .build();
 
+
         // when + then
 
+        // 인증객체 초기화 확인
+        Assertions.assertNull(SecurityContextHolder.getContext().getAuthentication());
+
+        // http
         mockMvc.perform(post("/api/authenticate")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(loginDto)))
-                .andExpect(status().isOk())
+                .andExpect(status().isOk()) // 200
                 .andDo(print());
     }
 
@@ -57,8 +62,6 @@ public class AuthcontrollerTest {
     void Test2() throws Exception {
 
         // given
-
-
         LoginDto loginDto = LoginDto.builder()
                 .email("hurjin1109@naver.com")
                 .password("1234")
@@ -71,5 +74,6 @@ public class AuthcontrollerTest {
                         .content(objectMapper.writeValueAsString(loginDto)))
                 .andExpect(status().isUnauthorized())
                 .andDo(print());
+
     }
 }
