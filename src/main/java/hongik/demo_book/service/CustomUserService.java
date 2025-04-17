@@ -13,7 +13,7 @@ public class CustomUserService {
 
     private final MemberRepository memberRepository;
 
-    public Member GetCurrentMmember() {
+    public Member GetCurrentMember() {
         String currentUserEmail = SecurityUtil.getCurrentEmail()
                 .orElseThrow(() -> new RuntimeException("현재 사용자의 이메일을 찾을 수 없습니다."));
 

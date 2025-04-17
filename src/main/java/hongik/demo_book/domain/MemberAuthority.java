@@ -14,11 +14,10 @@ import lombok.NoArgsConstructor;
 @Table(name = "member_authority")
 public class MemberAuthority {
 
-    // member 양방향, authority 단방향
+    // member 단방향, authority 단방향
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
 
     @ManyToOne
     @JoinColumn(name = "member_id")

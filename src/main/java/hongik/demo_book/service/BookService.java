@@ -29,7 +29,7 @@ public class BookService {
     public List<BookDto> BookDelete(BookDto bookDto) {
 
 
-        Member member = customUserService.GetCurrentMmember();
+        Member member = customUserService.GetCurrentMember();
 
         // 삭제할 도서가 속한 카테고리 찾기
         Category categoryToUpdate = member.getCategories().stream()
@@ -58,12 +58,12 @@ public class BookService {
         return remainingBooks;
     }
 
-    //도서 복록 반환
+    //도서 목록 반환
     //enum타입 카테고리 dto 받아서 책 목록 반환하는 식으로 해야할듯
     @Transactional(readOnly = true)
     public List<BookDto> BookList(BookListDto bookListDto) {
 
-        Member member = customUserService.GetCurrentMmember();
+        Member member = customUserService.GetCurrentMember();
         Category categoryToUpdate = member.getCategories().stream()
                 .filter(category -> category.getCategoryName().equals(bookListDto.getCategoryName()))
                 .findFirst()
@@ -86,7 +86,7 @@ public class BookService {
     @Transactional
     public BookDto BookSave(BookDto bookdto) {
 
-        Member member = customUserService.GetCurrentMmember();
+        Member member = customUserService.GetCurrentMember();
 
         Category categoryToUpdate = member.getCategories().stream()
                 .filter(category -> category.getCategoryName().equals(bookdto.getCategoryName()))

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import hongik.demo_book.config.WithMockBookUser;
 import hongik.demo_book.dto.LoginDto;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,12 @@ public class AuthcontrollerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @BeforeEach
+    void beforeTest() {
+        // 인증 객체 초기화
+        SecurityContextHolder.clearContext();
+    }
 
     @DisplayName("로그인 테스트")
     @WithMockBookUser()

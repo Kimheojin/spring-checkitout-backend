@@ -73,7 +73,7 @@ public class MemberService {
     public AddressDto AddressSave(AddressDto addressdto) {
 
 
-        Member member = customUserService.GetCurrentMmember();
+        Member member = customUserService.GetCurrentMember();
 
         Address address = Address.builder()
                 .city(addressdto.getCity())
@@ -97,7 +97,7 @@ public class MemberService {
     @Transactional
     public void deleteAddress() {
 
-        Member member = customUserService.GetCurrentMmember();
+        Member member = customUserService.GetCurrentMember();
 
         Address currentAddress = member.getAddress();
 
@@ -112,7 +112,7 @@ public class MemberService {
     @Transactional(readOnly = true)
     public AddressDto AddressReturn(){
 
-        Address address = customUserService.GetCurrentMmember().getAddress();
+        Address address = customUserService.GetCurrentMember().getAddress();
         return AddressDto.builder()
                 .zipcode(address.getZipcode())
                 .street(address.getZipcode())

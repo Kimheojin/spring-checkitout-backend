@@ -36,15 +36,4 @@ public class Category {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "category")
-    private List<Book> books = new ArrayList<>();
-
-
-    //연관관계 메소드
-    public void setMember(Member member) {
-        this.member = member;
-        member.getCategories().add(this);
-    }
-
 }

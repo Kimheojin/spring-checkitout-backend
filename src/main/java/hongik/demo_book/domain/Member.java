@@ -1,13 +1,12 @@
 package hongik.demo_book.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
 import jakarta.validation.constraints.Email;
-import lombok.*;
-
-import java.util.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "member")
@@ -39,20 +38,6 @@ public class Member {
 //활성화 여부
     @Column(name = "activated")
     private boolean activated;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "member")
-    @Builder.Default
-    private List<Category> categories = new ArrayList<>();
-
-
-    @OneToMany(mappedBy = "member")
-    @Builder.Default
-    private List<Library> librarys = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Builder.Default
-    private Set<MemberAuthority> memberAuthorities = new HashSet<>();
 
 
     //address update 관련

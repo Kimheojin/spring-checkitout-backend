@@ -28,14 +28,4 @@ public class Book {
     private Category category;
 
 
-
-    //연관관계 메소드
-    public void setCategory(Category category) {
-        this.category = category;
-        category.getBooks().add(this);
-    }
-
-    //생성 메소드
-
-
 }

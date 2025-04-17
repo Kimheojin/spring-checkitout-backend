@@ -16,4 +16,5 @@ import java.util.Optional;
 public interface MemberRepository extends JpaRepository<Member, Long> {
     @EntityGraph(attributePaths = "memberAuthorities", type = EntityGraph.EntityGraphType.FETCH)
     Optional<Member> findOneWithAuthoritiesByEmail(String email);
+
 }
