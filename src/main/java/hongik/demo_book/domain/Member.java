@@ -38,8 +38,6 @@ public class Member {
 //활성화 여부
     @Column(name = "activated")
     private boolean activated;
-
-
     //address update 관련
     public void updateAddress(Address address) {
         this.address = address;
