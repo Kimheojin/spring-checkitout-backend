@@ -28,6 +28,7 @@ public class insertInitialDbData {
     public void initializeAuthoritiees() {
         if(authorityRepository.findByAuthorityName("ROLE_USER").isEmpty()){
             Authority authority = Authority.builder()
+                    // ROLE 붙이기
                     .authorityName("ROLE_USER")
                     .build();
 

@@ -9,8 +9,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LibraryDto {
-    private String library_code;
+    private String libraryCode;
 
     //around, favorite 두개
-    private LibraryStatus library_status;
+    private LibraryStatus libraryStatus;
 }

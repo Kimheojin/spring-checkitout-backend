@@ -9,5 +9,5 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RcdReturnDto {
-    private List<Long> similar_books;
+    private List<Long> similarBooks;
 }

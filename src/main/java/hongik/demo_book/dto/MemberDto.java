@@ -18,7 +18,7 @@ public class MemberDto {
 
     @NotNull
     @Size(min = 1, max = 50)
-    private String membername;
+    private String memberName;
 
     //객체를 직렬화시 포함 X
     //직렬과 시 포함 O
@@ -40,7 +40,7 @@ public class MemberDto {
         if(member == null) return null;
 
         return MemberDto.builder()
-                .membername(member.getMembername())
+                .memberName(member.getMemberName())
                 .email(member.getEmail())
                 .authorityDtoSet(member.getMemberAuthorities().stream()
                         .map(authority -> AuthorityDto

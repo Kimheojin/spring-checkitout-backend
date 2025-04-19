@@ -16,7 +16,7 @@ public class Library {
     private Long id;
 
     //도서관 코드
-    private String library_code;
+    private String libraryCode;
 
     @Enumerated(EnumType.STRING)
     private LibraryStatus library_status;

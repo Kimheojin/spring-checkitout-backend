@@ -1,6 +1,7 @@
-package hongik.demo_book.exception;
+package hongik.demo_book.handler;
 
 import hongik.demo_book.dto.ErrorResponse;
+import hongik.demo_book.exception.CustomRuntimeException;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,7 +26,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(statusCode).body(errorResponse);
         
 
-        return null;
+
     }
 
 }

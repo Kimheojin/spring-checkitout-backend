@@ -40,7 +40,7 @@ public class FlaskService {
         //결과값 dto로 저장
         RcdReturnDto result = response.getBody();
 
-        List<Long> similarBooks = result.getSimilar_books();
+        List<Long> similarBooks = result.getSimilarBooks();
 
         //저장부분 구현하기
         similarBooks.forEach(isbn13 -> {

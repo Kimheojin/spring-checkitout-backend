@@ -35,7 +35,7 @@ public class MemberService {
 
 
         Member member = Member.builder()
-                .membername(memberDto.getMembername())
+                .membername(memberDto.getMemberName())
                 .password(passwordEncoder.encode(memberDto.getPassword()))
                 .email(memberDto.getEmail())
                 .activated(true)
@@ -78,7 +78,7 @@ public class MemberService {
         Address address = Address.builder()
                 .city(addressdto.getCity())
                 .street(addressdto.getStreet())
-                .zipcode(addressdto.getZipcode())
+                .zipCode(addressdto.getZipcode())
                 .build();
 
         member.updateAddress(address);
@@ -88,7 +88,7 @@ public class MemberService {
         return AddressDto.builder()
                 .city(savedAddress.getCity())
                 .street(savedAddress.getStreet())
-                .zipcode(savedAddress.getZipcode())
+                .zipcode(savedAddress.getZipCode())
                 .build();
     }
 
@@ -114,9 +114,9 @@ public class MemberService {
 
         Address address = customUserService.GetCurrentMember().getAddress();
         return AddressDto.builder()
-                .zipcode(address.getZipcode())
-                .street(address.getZipcode())
-                .city(address.getZipcode())
+                .zipcode(address.getZipCode())
+                .street(address.getZipCode())
+                .city(address.getZipCode())
                 .build();
     }
 }

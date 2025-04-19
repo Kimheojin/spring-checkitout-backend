@@ -15,15 +15,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Member {
-//이메일, 가입날짜, 비밀번호 추가하기
 
-//pk
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;
 
     @Column(name="membername", length = 50)
-    private String membername;
+    private String memberName;
 
     @Column(name = "email", unique = true)
     @Email

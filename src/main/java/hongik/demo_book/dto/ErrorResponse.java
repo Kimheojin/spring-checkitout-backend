@@ -10,7 +10,6 @@ import java.util.Map;
 @AllArgsConstructor
 @Getter
 @Builder
-@Setter
 public class ErrorResponse {
     private Integer statuscode;
 

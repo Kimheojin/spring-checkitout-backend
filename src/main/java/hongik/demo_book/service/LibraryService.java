@@ -26,14 +26,14 @@ public class LibraryService {
         Member member = customUserService.GetCurrentMember();
         //status에 따라 저장하기
         Library library = Library.builder()
-                .library_status(libraryDto.getLibrary_status())
-                .library_code(libraryDto.getLibrary_code())
+                .library_status(libraryDto.getLibraryStatus())
+                .library_code(libraryDto.getLibraryCode())
                 .member(member)
                 .build();
 
         libraryRepository.save(library);
 
-        return new LibraryDto(library.getLibrary_code(), library.getLibrary_status());
+        return new LibraryDto(library.getLibraryCode(), library.getLibrary_status());
 
     }
 
@@ -44,8 +44,8 @@ public class LibraryService {
         Member member = customUserService.GetCurrentMember();
 
         Library libraryToDelete = member.getLibrarys().stream()
-                .filter(library -> library.getLibrary_code().equals(libraryDto.getLibrary_code()))
-                .filter(library -> library.getLibrary_status().equals(libraryDto.getLibrary_status()))
+                .filter(library -> library.getLibrary_code().equals(libraryDto.getLibraryCode()))
+                .filter(library -> library.getLibrary_status().equals(libraryDto.getLibraryStatus()))
                 .findFirst()
                 .orElseThrow(() -> new NotFounLibrary());
 
@@ -67,7 +67,7 @@ public class LibraryService {
 
         // Library 엔티티를 LibraryDto로 변환
         return libraries.stream()
-                .map(library -> new LibraryDto(library.getLibrary_code(), library.getLibrary_status()))
+                .map(library -> new LibraryDto(library.getLibraryCode(), library.getLibrary_status()))
                 .collect(Collectors.toList());
     }
 }
