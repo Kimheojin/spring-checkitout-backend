@@ -1,11 +1,11 @@
 package hongik.demo_book.domain;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.*;
 
 @Embeddable
-//member entity에 종속
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,6 +15,7 @@ public class Address {
     private String city;
     private String street;
     //세부주소
+    @Column(name = "zip_code")
     private String zipCode;
 
 }

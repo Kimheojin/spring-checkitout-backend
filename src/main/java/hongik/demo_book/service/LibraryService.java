@@ -33,7 +33,7 @@ public class LibraryService {
 
         libraryRepository.save(library);
 
-        return new LibraryDto(library.getLibraryCode(), library.getLibrary_status());
+        return new LibraryDto(library.getLibraryCode(), library.getLibraryStatus());
 
     }
 
@@ -67,7 +67,7 @@ public class LibraryService {
 
         // Library 엔티티를 LibraryDto로 변환
         return libraries.stream()
-                .map(library -> new LibraryDto(library.getLibraryCode(), library.getLibrary_status()))
+                .map(library -> new LibraryDto(library.getLibraryCode(), library.getLibraryStatus()))
                 .collect(Collectors.toList());
     }
 }

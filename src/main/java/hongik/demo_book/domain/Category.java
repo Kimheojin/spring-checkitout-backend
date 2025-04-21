@@ -29,6 +29,7 @@ public class Category {
     private Long id;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "category_name")
     private CategoryName categoryName;
 
     @ManyToOne(fetch = LAZY)

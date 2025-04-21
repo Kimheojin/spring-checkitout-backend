@@ -19,7 +19,7 @@ public class Library {
     private String libraryCode;
 
     @Enumerated(EnumType.STRING)
-    private LibraryStatus library_status;
+    private LibraryStatus libraryStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")

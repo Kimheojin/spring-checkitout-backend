@@ -35,7 +35,7 @@ public class MemberService {
 
 
         Member member = Member.builder()
-                .membername(memberDto.getMemberName())
+                .memberName(memberDto.getMemberName())
                 .password(passwordEncoder.encode(memberDto.getPassword()))
                 .email(memberDto.getEmail())
                 .activated(true)
