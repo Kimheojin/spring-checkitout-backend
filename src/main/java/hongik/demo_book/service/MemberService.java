@@ -11,6 +11,7 @@ import hongik.demo_book.domain.MemberAuthority;
 import hongik.demo_book.dto.AddressDto;
 import hongik.demo_book.dto.MemberDto;
 import hongik.demo_book.dto.repoDto.MemberWithAuthoritiesDto;
+import hongik.demo_book.dto.response.AddressResponse;
 import hongik.demo_book.exception.DuplicateMember;
 import hongik.demo_book.exception.NotFoundMemberException;
 import hongik.demo_book.exception.NotFoundMemberaddress;
@@ -96,7 +97,7 @@ public class MemberService {
         Address address = Address.builder()
                 .city(addressdto.getCity())
                 .street(addressdto.getStreet())
-                .zipCode(addressdto.getZipcode())
+                .zipCode(addressdto.getZipCode())
                 .build();
 
         member.updateAddress(address);
@@ -106,14 +107,14 @@ public class MemberService {
         return AddressDto.builder()
                 .city(savedAddress.getCity())
                 .street(savedAddress.getStreet())
-                .zipcode(savedAddress.getZipCode())
+                .zipCode(savedAddress.getZipCode())
                 .build();
     }
 
 
     //주소 삭제
     @Transactional
-    public void deleteAddress() {
+    public AddressResponse deleteAddress() {
 
         Member member = customUserService.GetCurrentMember();
 
@@ -124,6 +125,15 @@ public class MemberService {
         }
         member.updateAddress(null);
 
+
+        // 안해도 되긴함, 변경 감지라
+        memberRepository.save(member);
+        return AddressResponse.builder()
+                .zipCode(member.getAddress().getZipCode())
+                .city(member.getAddress().getCity())
+                .street(member.getAddress().getStreet())
+                .build();
+
     }
 
     //주소 목록 반환
@@ -132,7 +142,7 @@ public class MemberService {
 
         Address address = customUserService.GetCurrentMember().getAddress();
         return AddressDto.builder()
-                .zipcode(address.getZipCode())
+                .zipCode(address.getZipCode())
                 .street(address.getStreet())
                 .city(address.getZipCode())
                 .build();

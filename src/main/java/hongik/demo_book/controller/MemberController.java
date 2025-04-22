@@ -2,6 +2,7 @@ package hongik.demo_book.controller;
 
 import hongik.demo_book.dto.AddressDto;
 import hongik.demo_book.dto.MemberDto;
+import hongik.demo_book.dto.response.AddressResponse;
 import hongik.demo_book.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -78,9 +79,9 @@ public class MemberController {
 
     @DeleteMapping("/member/address")
     @PreAuthorize("hasAnyRole('USER')")
-    public ResponseEntity<AddressDto> deleteMemberAddress(HttpServletRequest request) {
-        memberService.deleteAddress();
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<AddressResponse> deleteMemberAddress() {
+
+        return ResponseEntity.ok(memberService.deleteAddress());
     }
 
     //저장된 주소 반환
