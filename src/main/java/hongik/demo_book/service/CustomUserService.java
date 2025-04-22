@@ -18,7 +18,7 @@ public class CustomUserService {
         String currentUserEmail = SecurityUtil.getCurrentEmail()
                 .orElseThrow(NotFoundMemberException::new);
 
-        return memberRepository.findByMEmail(currentUserEmail)
+        return memberRepository.findByEmail(currentUserEmail)
                 .orElseThrow(NotFoundMemberException::new);
     }
 

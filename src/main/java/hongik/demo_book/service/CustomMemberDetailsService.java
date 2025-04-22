@@ -23,7 +23,7 @@ public class CustomMemberDetailsService implements UserDetailsService {
     @Override
     @Transactional // username 대신 email로
     public UserDetails loadUserByUsername(final String email) {
-        return memberRepository.findByMEmail(email)  // 이메일로 사용자 정보 검색
+        return memberRepository.findByEmail(email)  // 이메일로 사용자 정보 검색
                 .map(member -> createMember(email, member))
                 .orElseThrow(NotFoundMemberException::new);
     }
@@ -33,11 +33,9 @@ public class CustomMemberDetailsService implements UserDetailsService {
             throw new RuntimeException(email + " -> 활성화되어 있지 않습니다.");
         }
 
-
-        List<GrantedAuthority> grantedAuthorities = member.getAuthorities().stream()
-                .map(memberAuthority -> new SimpleGrantedAuthority(memberAuthority
-                        .getAuthority()
-                        .getAuthorityName()))
+        List<GrantedAuthority> grantedAuthorities = memberRepository.findMemberWithAuthoritiesByEmail(member.getEmail()).stream()
+                .map(memberWithAuthoritiesDto -> new SimpleGrantedAuthority(
+                        memberWithAuthoritiesDto.getAuthorities().toString()))
                 .collect(Collectors.toList());
 
         return new User(member.getEmail(),

@@ -5,7 +5,7 @@ import hongik.demo_book.Repository.LibraryRepository;
 import hongik.demo_book.domain.Library;
 import hongik.demo_book.domain.Member;
 import hongik.demo_book.dto.LibraryDto;
-import hongik.demo_book.exception.NotFounLibrary;
+import hongik.demo_book.exception.NotFoundLibrary;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,8 +26,8 @@ public class LibraryService {
         Member member = customUserService.GetCurrentMember();
         //status에 따라 저장하기
         Library library = Library.builder()
-                .library_status(libraryDto.getLibraryStatus())
-                .library_code(libraryDto.getLibraryCode())
+                .libraryStatus(libraryDto.getLibraryStatus())
+                .libraryCode(libraryDto.getLibraryCode())
                 .member(member)
                 .build();
 
@@ -43,11 +43,12 @@ public class LibraryService {
 
         Member member = customUserService.GetCurrentMember();
 
-        Library libraryToDelete = member.getLibrarys().stream()
-                .filter(library -> library.getLibrary_code().equals(libraryDto.getLibraryCode()))
-                .filter(library -> library.getLibrary_status().equals(libraryDto.getLibraryStatus()))
+        Library libraryToDelete = libraryRepository.FindLibrarhWithMember(member)
+                .stream()
+                .filter(library -> library.getLibraryCode().equals(libraryDto.getLibraryCode()))
+                .filter(library -> library.getLibraryStatus().equals(libraryDto.getLibraryStatus()))
                 .findFirst()
-                .orElseThrow(() -> new NotFounLibrary());
+                .orElseThrow(NotFoundLibrary::new);
 
         libraryRepository.delete(libraryToDelete);
 

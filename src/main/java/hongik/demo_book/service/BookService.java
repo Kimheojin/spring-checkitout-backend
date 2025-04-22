@@ -8,6 +8,8 @@ import hongik.demo_book.domain.Category;
 import hongik.demo_book.domain.Member;
 import hongik.demo_book.dto.BookDto;
 import hongik.demo_book.dto.BookListDto;
+import hongik.demo_book.exception.NotFoundBook;
+import hongik.demo_book.exception.NotFoundCategory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,24 +33,29 @@ public class BookService {
 
         Member member = customUserService.GetCurrentMember();
 
+        List<Category> categories = categoryRepository.findCategoriesWithMember(member);
+
         // 삭제할 도서가 속한 카테고리 찾기
-        Category categoryToUpdate = member.getCategories().stream()
+        Category categoryToUpdate = categories.stream()
                 .filter(category -> category.getCategoryName().equals(bookDto.getCategoryName()))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("해당 카테고리를 찾을 수 없습니다."));
+                .orElseThrow(NotFoundCategory::new);
+
+
 
         // 카테고리에서 삭제할 도서 찾기
-        Book bookToDelete = categoryToUpdate.getBooks().stream()
+        Book bookToDelete = bookRepository.findBookBycategoryname(String.valueOf(categoryToUpdate.getCategoryName()), member)
+                .stream()
                 .filter(book -> book.getIsbn13().equals(bookDto.getIsbn13()))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("해당 도서를 찾을 수 없습니다."));
+                .orElseThrow(NotFoundBook::new);
 
         // 도서 삭제
-        categoryToUpdate.getBooks().remove(bookToDelete);
+
         bookRepository.delete(bookToDelete);
 
         // 삭제 후 남아있는 도서 목록 반환
-        List<BookDto> remainingBooks = categoryToUpdate.getBooks().stream()
+        List<BookDto> remainingBooks = bookRepository.findBookBycategoryname(categoryToUpdate.getCategoryName().toString(), member).stream()
                 .map(book -> BookDto.builder()
                         .isbn13(book.getIsbn13())
                         .categoryName(categoryToUpdate.getCategoryName())
@@ -64,13 +71,16 @@ public class BookService {
     public List<BookDto> BookList(BookListDto bookListDto) {
 
         Member member = customUserService.GetCurrentMember();
-        Category categoryToUpdate = member.getCategories().stream()
+
+        List<Category> categories = categoryRepository.findCategoriesWithMember(member);
+
+        Category categoryToUpdate = categories.stream()
                 .filter(category -> category.getCategoryName().equals(bookListDto.getCategoryName()))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("해당 카테고리를 찾을 수 없습니다."));
+                .orElseThrow(NotFoundCategory::new);
 
 
-        List<BookDto> remainingBooks = categoryToUpdate.getBooks().stream()
+        List<BookDto> remainingBooks = bookRepository.findBookBycategoryname(categoryToUpdate.getCategoryName().toString(), member).stream()
                 .map(book -> BookDto.builder()
                         .isbn13(book.getIsbn13())
                         .categoryName(categoryToUpdate.getCategoryName())
@@ -88,25 +98,26 @@ public class BookService {
 
         Member member = customUserService.GetCurrentMember();
 
-        Category categoryToUpdate = member.getCategories().stream()
+        List<Category> categories = categoryRepository.findCategoriesWithMember(member);
+
+        Category categoryToUpdate = categories.stream()
                 .filter(category -> category.getCategoryName().equals(bookdto.getCategoryName()))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(NotFoundCategory::new);
 
         if (categoryToUpdate == null) {
             categoryToUpdate= Category.builder()
                     .categoryName(bookdto.getCategoryName())
+                    .member(member)
                     .build();
-
-            categoryToUpdate.setMember(member);
 
             categoryRepository.save(categoryToUpdate);
         }
 
         Book book = Book.builder()
                 .isbn13(bookdto.getIsbn13())
+                .category(categoryToUpdate)
                 .build();
-        book.setCategory(categoryToUpdate);
 
         bookRepository.save(book);
 

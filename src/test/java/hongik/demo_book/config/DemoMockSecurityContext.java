@@ -66,7 +66,7 @@ public class DemoMockSecurityContext implements WithSecurityContextFactory<WithM
         Member member = Member.builder()
                 .email(email)
                 .password(passwordEncoder.encode(password))
-                .membername(membername)
+                .memberName(membername)
                 .activated(true)
                 .build();
 
