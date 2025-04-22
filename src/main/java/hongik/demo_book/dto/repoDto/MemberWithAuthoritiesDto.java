@@ -21,7 +21,19 @@ public class MemberWithAuthoritiesDto {
     private String email;
     private Address address;
     private boolean activated;
-    private List<String> authorities;
     private String password;
+    private List<String> authorities;
+
+    // 명시적
+    public MemberWithAuthoritiesDto(Long id, String memberName, String email, Address address, boolean activated, String password) {
+        this.id = id;
+        this.memberName = memberName;
+        this.email = email;
+        this.address = address;
+        this.activated = activated;
+        this.password = password;
+        this.authorities = null; // 나중에 별도로 설정
+    }
+
 
 }

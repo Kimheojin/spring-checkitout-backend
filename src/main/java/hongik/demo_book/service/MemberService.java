@@ -56,8 +56,6 @@ public class MemberService {
 
 
 
-
-
         MemberWithAuthoritiesDto memberWithAuthoritiesDto = MemberWithAuthoritiesDto.builder()
                 .id(member.getId())
                 .authorities(List.of(memberAuthority.toString()))

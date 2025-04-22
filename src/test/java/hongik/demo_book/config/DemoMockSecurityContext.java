@@ -80,8 +80,10 @@ public class DemoMockSecurityContext implements WithSecurityContextFactory<WithM
                 .authority(authority)
                 .member(member)  // Member 설정
                 .build();
-        memberAuthorityRepository.save(memberAuthority);
+
         memberRepository.save(member);
+        memberAuthorityRepository.save(memberAuthority);
+
 
         // 저장 후 반환
         return MemberWithAuthoritiesDto.builder()
