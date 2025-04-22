@@ -2,10 +2,12 @@ package hongik.demo_book.config;
 
 
 import hongik.demo_book.Repository.AuthorityRepository;
+import hongik.demo_book.Repository.MemberAuthorityRepository;
 import hongik.demo_book.Repository.MemberRepository;
 import hongik.demo_book.domain.Authority;
 import hongik.demo_book.domain.Member;
 import hongik.demo_book.domain.MemberAuthority;
+import hongik.demo_book.dto.repoDto.MemberWithAuthoritiesDto;
 import hongik.demo_book.exception.NoRoleUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,6 +28,7 @@ public class DemoMockSecurityContext implements WithSecurityContextFactory<WithM
     private final MemberRepository memberRepository;
     private final AuthorityRepository authorityRepository;
     private final PasswordEncoder passwordEncoder;
+    private final MemberAuthorityRepository memberAuthorityRepository;
 
 
     @Override
@@ -38,12 +41,14 @@ public class DemoMockSecurityContext implements WithSecurityContextFactory<WithM
 
         SecurityContext context = SecurityContextHolder.createEmptyContext();
 
-        Member testMember = memberRepository.findMemberWithAuthoritiesByEmail(email)
+        MemberWithAuthoritiesDto testMember = memberRepository.findMemberWithAuthoritiesByEmail(email)
                 .orElseGet(() -> createMember(email, password, membername, roles));
 
 
-        List<SimpleGrantedAuthority> authorities = testMember.getMemberAuthorities().stream()
-                .map(memberAuth -> new SimpleGrantedAuthority(memberAuth.getAuthority().getAuthorityName()))
+        List<SimpleGrantedAuthority> authorities =
+                memberRepository.findMemberWithAuthoritiesByEmail(testMember.getEmail())
+                        .stream()
+                .map(memberAuth -> new SimpleGrantedAuthority(memberAuth.getAuthorities().get(0)))
                 .collect(Collectors.toList());
 
 
@@ -56,7 +61,7 @@ public class DemoMockSecurityContext implements WithSecurityContextFactory<WithM
 
 
 
-    private Member createMember(String email, String password, String membername, String[] role) {
+    private MemberWithAuthoritiesDto createMember(String email, String password, String membername, String[] role) {
 
 
         Authority authority = authorityRepository.findByAuthorityName(role[0]).orElseThrow(
@@ -75,9 +80,17 @@ public class DemoMockSecurityContext implements WithSecurityContextFactory<WithM
                 .authority(authority)
                 .member(member)  // Member 설정
                 .build();
-        member.getMemberAuthorities().add(memberAuthority);
-        member = memberRepository.save(member);
+        memberAuthorityRepository.save(memberAuthority);
+        memberRepository.save(member);
+
         // 저장 후 반환
-        return member;
+        return MemberWithAuthoritiesDto.builder()
+                .activated(member.isActivated())
+                .address(member.getAddress())
+                .id(member.getId())
+                .memberName(member.getMemberName())
+                .email(member.getEmail())
+                .authorities(List.of(memberAuthority.toString()))
+                .password(member.getPassword()).build();
     }
 }

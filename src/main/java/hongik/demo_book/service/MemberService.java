@@ -2,6 +2,7 @@ package hongik.demo_book.service;
 
 
 import hongik.demo_book.Repository.AuthorityRepository;
+import hongik.demo_book.Repository.MemberAuthorityRepository;
 import hongik.demo_book.Repository.MemberRepository;
 import hongik.demo_book.domain.Address;
 import hongik.demo_book.domain.Authority;
@@ -28,6 +29,7 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
     private final CustomUserService customUserService;
     private final AuthorityRepository authorityRepository;
+    private final MemberAuthorityRepository memberAuthorityRepository;
     @Transactional
     public MemberDto signup(MemberDto memberDto) {
         if (memberRepository.findMemberWithAuthoritiesByEmail(memberDto.getEmail()).orElse(null) != null) {
@@ -45,11 +47,16 @@ public class MemberService {
                 .activated(true)
                 .build();
 
-        member = memberRepository.save(member);
+        memberRepository.save(member);
         MemberAuthority memberAuthority = MemberAuthority.builder()
                 .authority(authority)
                 .member(member)  // Member 설정
                 .build();
+        memberAuthorityRepository.save(memberAuthority);
+
+
+
+
 
         MemberWithAuthoritiesDto memberWithAuthoritiesDto = MemberWithAuthoritiesDto.builder()
                 .id(member.getId())
