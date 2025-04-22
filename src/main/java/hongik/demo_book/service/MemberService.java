@@ -59,7 +59,7 @@ public class MemberService {
 
         MemberWithAuthoritiesDto memberWithAuthoritiesDto = MemberWithAuthoritiesDto.builder()
                 .id(member.getId())
-                .authorities(List.of(memberAuthority.toString()))
+                .authorities(List.of(memberAuthority.getAuthority().getAuthorityName()))
                 .memberName(member.getMemberName())
                 .email(member.getEmail())
                 .address(member.getAddress())
@@ -128,11 +128,9 @@ public class MemberService {
 
         // 안해도 되긴함, 변경 감지라
         memberRepository.save(member);
-        return AddressResponse.builder()
-                .zipCode(member.getAddress().getZipCode())
-                .city(member.getAddress().getCity())
-                .street(member.getAddress().getStreet())
-                .build();
+        
+        // 빈 객체 반환
+        return AddressResponse.builder().build();
 
     }
 
