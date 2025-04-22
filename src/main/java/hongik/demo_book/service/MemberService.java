@@ -9,13 +9,17 @@ import hongik.demo_book.domain.Member;
 import hongik.demo_book.domain.MemberAuthority;
 import hongik.demo_book.dto.AddressDto;
 import hongik.demo_book.dto.MemberDto;
+import hongik.demo_book.dto.repoDto.MemberWithAuthoritiesDto;
 import hongik.demo_book.exception.DuplicateMember;
 import hongik.demo_book.exception.NotFoundMemberException;
+import hongik.demo_book.exception.NotFoundMemberaddress;
 import hongik.demo_book.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +30,7 @@ public class MemberService {
     private final AuthorityRepository authorityRepository;
     @Transactional
     public MemberDto signup(MemberDto memberDto) {
-        if (memberRepository.findOneWithAuthoritiesByEmail(memberDto.getEmail()).orElse(null) != null) {
+        if (memberRepository.findMemberWithAuthoritiesByEmail(memberDto.getEmail()).orElse(null) != null) {
             throw new DuplicateMember();
         }
 
@@ -46,16 +50,25 @@ public class MemberService {
                 .authority(authority)
                 .member(member)  // Member 설정
                 .build();
-        member.getMemberAuthorities().add(memberAuthority);
 
-        return MemberDto.from(member);
+        MemberWithAuthoritiesDto memberWithAuthoritiesDto = MemberWithAuthoritiesDto.builder()
+                .id(member.getId())
+                .authorities(List.of(memberAuthority.toString()))
+                .memberName(member.getMemberName())
+                .email(member.getEmail())
+                .address(member.getAddress())
+                .activated(member.isActivated())
+                .build();
+
+
+        return MemberDto.from(memberWithAuthoritiesDto);
 
 
     }
 
     @Transactional(readOnly = true)
     public MemberDto getMemberWithAuthorities(String email) {
-        return MemberDto.from(memberRepository.findOneWithAuthoritiesByEmail(email).orElse(null));
+        return MemberDto.from(memberRepository.findMemberWithAuthoritiesByEmail(email).orElse(null));
     }
 
     //읽기전용
@@ -63,8 +76,8 @@ public class MemberService {
     public MemberDto getMyUserWithAuthorities() {
         return MemberDto.from(
                 SecurityUtil.getCurrentEmail()
-                        .flatMap(memberRepository::findOneWithAuthoritiesByEmail)
-                        .orElseThrow(() -> new NotFoundMemberException())
+                        .flatMap(memberRepository::findMemberWithAuthoritiesByEmail)
+                        .orElseThrow(NotFoundMemberException::new)
         );
     }
 
@@ -102,7 +115,7 @@ public class MemberService {
         Address currentAddress = member.getAddress();
 
         if(currentAddress == null){
-            throw new RuntimeException("주소가 설정되어있지 않습니다");
+            throw new NotFoundMemberaddress();
         }
         member.updateAddress(null);
 

@@ -24,8 +24,6 @@ public class GlobalExceptionHandler {
         }
 
         return ResponseEntity.status(statusCode).body(errorResponse);
-        
-
 
     }
 

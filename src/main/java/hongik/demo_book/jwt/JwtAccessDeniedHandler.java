@@ -25,7 +25,7 @@ public class JwtAccessDeniedHandler implements AccessDeniedHandler {
                        HttpServletResponse response,
                        AccessDeniedException accessDeniedException)
             throws IOException {
-        //필터단은 추상화 그게 낮아서 json 직접 생성 필
+        //필터단은 추상화 그게 낮아서 json 직접 생성 필요
         int status = HttpServletResponse.SC_FORBIDDEN;
 
         response.setStatus(status); // 403

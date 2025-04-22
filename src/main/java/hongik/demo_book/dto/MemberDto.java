@@ -2,6 +2,7 @@ package hongik.demo_book.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import hongik.demo_book.domain.Member;
+import hongik.demo_book.dto.repoDto.MemberWithAuthoritiesDto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -36,16 +37,16 @@ public class MemberDto {
 
     private Set<AuthorityDto> authorityDtoSet;
 
-    public static MemberDto from(Member member) {
-        if(member == null) return null;
+    public static MemberDto from(MemberWithAuthoritiesDto memberWithAuthoritiesDto) {
+        if(memberWithAuthoritiesDto == null) return null;
 
         return MemberDto.builder()
-                .memberName(member.getMemberName())
-                .email(member.getEmail())
-                .authorityDtoSet(member.getMemberAuthorities().stream()
+                .memberName(memberWithAuthoritiesDto.getMemberName())
+                .email(memberWithAuthoritiesDto.getEmail())
+                .authorityDtoSet(memberWithAuthoritiesDto.getAuthorities().stream()
                         .map(authority -> AuthorityDto
                                 .builder()
-                                .authorityName(authority.getAuthority().getAuthorityName())
+                                .authorityName(authority)
                                 .build())
                         .collect(Collectors.toSet()))
                 .build();

@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 public interface LibraryRepository extends JpaRepository<Library, Long> {
 
-    // 쿼리 메소드
+    // 다대 일이라 가능
     List<Library> findAllByMember(Member member);
 }

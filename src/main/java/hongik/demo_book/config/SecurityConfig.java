@@ -1,7 +1,6 @@
 package hongik.demo_book.config;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import hongik.demo_book.jwt.JwtAccessDeniedHandler;
 import hongik.demo_book.jwt.JwtAuthenticationEntryPoint;
 import hongik.demo_book.jwt.JwtSecurityConfig;

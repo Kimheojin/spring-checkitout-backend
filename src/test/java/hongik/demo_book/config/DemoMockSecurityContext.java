@@ -38,7 +38,7 @@ public class DemoMockSecurityContext implements WithSecurityContextFactory<WithM
 
         SecurityContext context = SecurityContextHolder.createEmptyContext();
 
-        Member testMember = memberRepository.findOneWithAuthoritiesByEmail(email)
+        Member testMember = memberRepository.findMemberWithAuthoritiesByEmail(email)
                 .orElseGet(() -> createMember(email, password, membername, roles));
 
 
