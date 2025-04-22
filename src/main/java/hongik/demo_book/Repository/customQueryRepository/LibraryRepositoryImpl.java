@@ -13,13 +13,13 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class LibraryQueryRepository implements LibraryRepositoryCustom{
+public class LibraryRepositoryImpl implements LibraryRepositoryCustom{
 
     private final JPAQueryFactory jpaQueryFactory;
 
 
     @Override
-    public List<Library> FindLibrarhWithMember(Member member) {
+    public List<Library> FindLibrayhWithMember(Member member) {
         return jpaQueryFactory.selectFrom(QLibrary.library)
                 .join(QLibrary.library.member, QMember.member)
                 .where(QLibrary.library.member.eq(member))

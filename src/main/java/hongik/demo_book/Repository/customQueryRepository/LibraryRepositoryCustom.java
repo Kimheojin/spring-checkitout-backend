@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface LibraryRepositoryCustom {
 
-    List<Library> FindLibrarhWithMember(Member member);
+    List<Library> FindLibrayhWithMember(Member member);
 
 }

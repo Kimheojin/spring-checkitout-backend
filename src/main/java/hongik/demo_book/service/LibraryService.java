@@ -43,7 +43,7 @@ public class LibraryService {
 
         Member member = customUserService.GetCurrentMember();
 
-        Library libraryToDelete = libraryRepository.FindLibrarhWithMember(member)
+        Library libraryToDelete = libraryRepository.FindLibrayhWithMember(member)
                 .stream()
                 .filter(library -> library.getLibraryCode().equals(libraryDto.getLibraryCode()))
                 .filter(library -> library.getLibraryStatus().equals(libraryDto.getLibraryStatus()))

@@ -135,7 +135,7 @@ public class MemberService {
         Address address = customUserService.GetCurrentMember().getAddress();
         return AddressDto.builder()
                 .zipcode(address.getZipCode())
-                .street(address.getZipCode())
+                .street(address.getStreet())
                 .city(address.getZipCode())
                 .build();
     }
