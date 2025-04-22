@@ -2,6 +2,7 @@ package hongik.demo_book.service;
 
 import hongik.demo_book.Repository.MemberRepository;
 import hongik.demo_book.domain.Member;
+import hongik.demo_book.dto.repoDto.MemberWithAuthoritiesDto;
 import hongik.demo_book.exception.NotFoundMemberException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,14 +29,20 @@ public class CustomMemberDetailsService implements UserDetailsService {
                 .orElseThrow(NotFoundMemberException::new);
     }
 
+
     private User createMember(String email, Member member) {
         if (!member.isActivated()) {
             throw new RuntimeException(email + " -> 활성화되어 있지 않습니다.");
         }
 
-        List<GrantedAuthority> grantedAuthorities = memberRepository.findMemberWithAuthoritiesByEmail(member.getEmail()).stream()
-                .map(memberWithAuthoritiesDto -> new SimpleGrantedAuthority(
-                        memberWithAuthoritiesDto.getAuthorities().toString()))
+        // 회원과 권한 정보 가져오기
+        MemberWithAuthoritiesDto memberWithAuthorities =
+                memberRepository.findMemberWithAuthoritiesByEmail(member.getEmail())
+                        .orElseThrow(NotFoundMemberException::new);
+
+        // 각 권한 문자열을 SimpleGrantedAuthority 객체로 변환
+        List<GrantedAuthority> grantedAuthorities = memberWithAuthorities.getAuthorities().stream()
+                .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 
         return new User(member.getEmail(),
