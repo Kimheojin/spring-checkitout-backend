@@ -5,6 +5,7 @@ import hongik.demo_book.Repository.LibraryRepository;
 import hongik.demo_book.domain.Library;
 import hongik.demo_book.domain.Member;
 import hongik.demo_book.dto.LibraryDto;
+import hongik.demo_book.exception.InvaliedInput;
 import hongik.demo_book.exception.NotFoundLibrary;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,10 @@ public class LibraryService {
     @Transactional
     public LibraryDto LibrarySave(LibraryDto libraryDto) {
 
+        if(libraryDto == null){ // 널체크는 바로 하는 게 좋을지도
+            throw new InvaliedInput();
+        }
+
         Member member = customUserService.GetCurrentMember();
         //status에 따라 저장하기
         Library library = Library.builder()
@@ -32,7 +37,6 @@ public class LibraryService {
                 .build();
 
         libraryRepository.save(library);
-
         return new LibraryDto(library.getLibraryCode(), library.getLibraryStatus());
 
     }
