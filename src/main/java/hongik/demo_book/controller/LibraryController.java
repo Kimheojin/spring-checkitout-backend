@@ -39,7 +39,7 @@ public class LibraryController {
 
     @GetMapping("/member/librarys")
     @PreAuthorize("hasAnyRole('USER')")
-    public ResponseEntity<List<LibraryDto>> returnMemberLibrary(HttpServletRequest request){
+    public ResponseEntity<List<LibraryDto>> returnMemberLibrary(){
         return ResponseEntity.ok(libraryService.LibraryList());
     }
     //도서관 목록 반환

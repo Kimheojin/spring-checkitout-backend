@@ -11,6 +11,6 @@ import lombok.*;
 public class LibraryDto {
     private String libraryCode;
 
-    //around, favorite 두개
+    //Around, Favorite 두개
     private LibraryStatus libraryStatus;
 }

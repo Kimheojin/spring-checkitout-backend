@@ -16,6 +16,6 @@ public class AddressDto {
     @NotNull
     private String street;
     @NotNull
-    private String zipcode;
+    private String zipCode;
 
 }

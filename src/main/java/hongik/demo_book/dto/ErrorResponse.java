@@ -11,7 +11,7 @@ import java.util.Map;
 @Getter
 @Builder
 public class ErrorResponse {
-    private Integer statuscode;
+    private Integer statusCode;
 
     private String message;
 

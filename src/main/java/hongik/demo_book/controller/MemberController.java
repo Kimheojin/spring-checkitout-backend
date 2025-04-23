@@ -80,7 +80,6 @@ public class MemberController {
     @DeleteMapping("/member/address")
     @PreAuthorize("hasAnyRole('USER')")
     public ResponseEntity<AddressResponse> deleteMemberAddress() {
-
         return ResponseEntity.ok(memberService.deleteAddress());
     }
 

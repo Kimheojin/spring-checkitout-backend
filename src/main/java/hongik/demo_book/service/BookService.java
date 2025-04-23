@@ -99,9 +99,6 @@ public class BookService {
 
         Member member = customUserService.GetCurrentMember();
 
-
-
-
         // 이미 존재하는 겨우
         Category category = categoryRepository.findCategoriesWithMember(member).stream()
                 .filter(c -> c.getCategoryName().equals(bookdto.getCategoryName()))

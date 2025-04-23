@@ -15,7 +15,7 @@ public class GlobalExceptionHandler {
         Integer statusCode = e.getstatusCode();
 
         ErrorResponse errorResponse = ErrorResponse.builder()
-                .statuscode(statusCode)
+                .statusCode(statusCode)
                 .message(e.getMessage())
                 .build();
         
