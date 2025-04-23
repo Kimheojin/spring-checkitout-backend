@@ -17,6 +17,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithSecurityContextFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
@@ -35,20 +36,18 @@ public class DemoMockSecurityContext implements WithSecurityContextFactory<WithM
     public SecurityContext createSecurityContext(WithMockBookUser annotation) {
         String email = annotation.email(); // annotation 한번 가공 되어서 value로
         String password = annotation.password();
-        String membername = annotation.membername(); // 마찬가지 membername
+        String memberName = annotation.membername(); // 마찬가지 membername
         String[] roles = annotation.roles();
 
 
         SecurityContext context = SecurityContextHolder.createEmptyContext();
 
         MemberWithAuthoritiesDto testMember = memberRepository.findMemberWithAuthoritiesByEmail(email)
-                .orElseGet(() -> createMember(email, password, membername, roles));
+                .orElseGet(() -> createMember(email, password, memberName, roles));
 
 
-        List<SimpleGrantedAuthority> authorities =
-                memberRepository.findMemberWithAuthoritiesByEmail(testMember.getEmail())
-                        .stream()
-                .map(memberAuth -> new SimpleGrantedAuthority(memberAuth.getAuthorities().get(0)))
+        List<SimpleGrantedAuthority> authorities = testMember.getAuthorities().stream()
+                .map(auth -> new SimpleGrantedAuthority(auth))
                 .collect(Collectors.toList());
 
 
@@ -61,17 +60,19 @@ public class DemoMockSecurityContext implements WithSecurityContextFactory<WithM
 
 
 
-    private MemberWithAuthoritiesDto createMember(String email, String password, String membername, String[] role) {
+
+    @Transactional
+    protected MemberWithAuthoritiesDto createMember(String email, String password, String memberName, String[] role) {
 
 
-        Authority authority = authorityRepository.findByAuthorityName(role[0]).orElseThrow(
-                () -> new NoRoleUser());
+        Authority authority = authorityRepository.findByAuthorityName(role[0])
+                .orElseThrow(NoRoleUser::new);
 
 
         Member member = Member.builder()
                 .email(email)
                 .password(passwordEncoder.encode(password))
-                .memberName(membername)
+                .memberName(memberName)
                 .activated(true)
                 .build();
 
@@ -92,7 +93,8 @@ public class DemoMockSecurityContext implements WithSecurityContextFactory<WithM
                 .id(member.getId())
                 .memberName(member.getMemberName())
                 .email(member.getEmail())
-                .authorities(List.of(memberAuthority.toString()))
-                .password(member.getPassword()).build();
+                .authorities(List.of(authority.getAuthorityName()))
+                .password(member.getPassword())
+                .build();
     }
 }

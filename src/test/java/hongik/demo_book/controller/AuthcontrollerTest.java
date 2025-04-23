@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.web.servlet.MockMvc;
@@ -42,6 +43,8 @@ public class AuthcontrollerTest {
         // given
 
         // 인증 컨텍스트 초기화 (로그아웃)
+
+
         SecurityContextHolder.clearContext();
 
         LoginDto loginDto = LoginDto.builder()
@@ -64,7 +67,7 @@ public class AuthcontrollerTest {
     }
 
 
-    @DisplayName("401 custom exception 테스트")
+    @DisplayName("Not Found custom exception 테스트")
     @Test
     void Test2() throws Exception {
 
@@ -79,7 +82,7 @@ public class AuthcontrollerTest {
         mockMvc.perform(post("/api/authenticate")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(loginDto)))
-                .andExpect(status().isUnauthorized())
+                .andExpect(status().is(HttpStatus.NOT_FOUND.value()))
                 .andDo(print());
 
     }

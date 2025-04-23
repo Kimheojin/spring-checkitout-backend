@@ -7,7 +7,9 @@ import hongik.demo_book.config.WithMockBookUser;
 import hongik.demo_book.domain.CategoryName;
 import hongik.demo_book.domain.Member;
 import hongik.demo_book.dto.BookDto;
+import hongik.demo_book.dto.LoginDto;
 import hongik.demo_book.service.CustomUserService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,6 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -49,9 +52,9 @@ class BookControllerTest {
     @DisplayName("책 저장")
     void test1() throws Exception {
         // given
-        Member member = customUserService.GetCurrentMember();
+
         BookDto bookDto = BookDto.builder()
-                .categoryName(CategoryName.valueOf("Favorite"))
+                .categoryName(CategoryName.valueOf("FAVORITE"))
                 .isbn13("1234567890")
                 .build();
 
@@ -60,13 +63,7 @@ class BookControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(bookDto)))
                 .andExpect(status().isOk());
-
-
-
-
-
     }
-
 
 
 
