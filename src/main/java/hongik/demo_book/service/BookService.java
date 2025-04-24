@@ -24,15 +24,13 @@ public class BookService {
 
     private final CategoryRepository categoryRepository;
     private final BookRepository bookRepository;
-    private final CustomUserService customUserService;
-
 
     //책 삭제 후 해당 리스트 반환
     @Transactional
-    public List<BookDto> BookDelete(BookDto bookDto) {
+    public List<BookDto> BookDelete(BookDto bookDto, Member member) {
 
 
-        Member member = customUserService.GetCurrentMember();
+
 
         List<Category> categories = categoryRepository.findCategoriesWithMember(member);
 
@@ -69,9 +67,9 @@ public class BookService {
     //도서 목록 반환
     //enum타입 카테고리 dto 받아서 책 목록 반환하는 식으로 해야할듯
     @Transactional(readOnly = true)
-    public List<BookDto> BookList(BookListDto bookListDto) {
+    public List<BookDto> BookList(BookListDto bookListDto, Member member) {
 
-        Member member = customUserService.GetCurrentMember();
+
 
         List<Category> categories = categoryRepository.findCategoriesWithMember(member);
 
@@ -95,9 +93,8 @@ public class BookService {
     
     //도서 저장
     @Transactional
-    public BookDto BookSave(BookDto bookdto) {
+    public BookDto BookSave(BookDto bookdto, Member member) {
 
-        Member member = customUserService.GetCurrentMember();
 
         // 이미 존재하는 겨우
         Category category = categoryRepository.findCategoriesWithMember(member).stream()

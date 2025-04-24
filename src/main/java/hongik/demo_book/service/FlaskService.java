@@ -3,6 +3,7 @@ package hongik.demo_book.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hongik.demo_book.domain.CategoryName;
+import hongik.demo_book.domain.Member;
 import hongik.demo_book.dto.BookDto;
 import hongik.demo_book.dto.RcdRequestDto;
 import hongik.demo_book.dto.RcdReturnDto;
@@ -22,7 +23,7 @@ public class FlaskService {
     private final ObjectMapper objectMapper;
 
     @Transactional
-    public RcdReturnDto BookRecommend(RcdRequestDto rcdRequestDto) throws JsonProcessingException {
+    public RcdReturnDto BookRecommend(RcdRequestDto rcdRequestDto, Member member) throws JsonProcessingException {
 
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
@@ -50,7 +51,7 @@ public class FlaskService {
                     .categoryName(CategoryName.valueOf("Recommendation"))
                     .build();
             // 책 저장
-            bookService.BookSave(bookDto);
+            bookService.BookSave(bookDto, member);
         });
 
         return result;

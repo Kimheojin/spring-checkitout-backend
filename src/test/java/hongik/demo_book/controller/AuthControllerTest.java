@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class AuthcontrollerTest {
+public class AuthControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -42,10 +42,7 @@ public class AuthcontrollerTest {
     void Test1() throws Exception {
 
         // given
-
         // 인증 컨텍스트 초기화 (로그아웃)
-
-
         SecurityContextHolder.clearContext();
 
         LoginDto loginDto = LoginDto.builder()

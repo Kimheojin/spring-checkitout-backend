@@ -19,16 +19,15 @@ import java.util.stream.Collectors;
 public class LibraryService {
 
     private final LibraryRepository libraryRepository;
-    private final CustomUserService customUserService;
     //도서관 저장
     @Transactional
-    public LibraryDto LibrarySave(LibraryDto libraryDto) {
+    public LibraryDto LibrarySave(LibraryDto libraryDto, Member member) {
 
         if(libraryDto == null){ // 널체크는 바로 하는 게 좋을지도
             throw new InvaliedInput();
         }
 
-        Member member = customUserService.GetCurrentMember();
+
         //status에 따라 저장하기
         Library library = Library.builder()
                 .libraryStatus(libraryDto.getLibraryStatus())
@@ -43,9 +42,8 @@ public class LibraryService {
 
     //도서관 삭제
     @Transactional
-    public List<LibraryDto> LibraryDelete(LibraryDto libraryDto) {
+    public List<LibraryDto> LibraryDelete(LibraryDto libraryDto, Member member) {
 
-        Member member = customUserService.GetCurrentMember();
 
         Library libraryToDelete = libraryRepository.FindLibrayhWithMember(member)
                 .stream()
@@ -56,16 +54,16 @@ public class LibraryService {
 
         libraryRepository.delete(libraryToDelete);
 
-        return LibraryList();
+        return LibraryList(member);
         //현재 저장 도서관 반환
 
     }
 
     //도서관 리스트 반환
     @Transactional(readOnly = true)
-    public List<LibraryDto> LibraryList() {
+    public List<LibraryDto> LibraryList(Member member) {
 
-        Member member = customUserService.GetCurrentMember();
+
         // 회원과 매핑된 도서관 리스트 가져오기
         //그거 사용
         List<Library> libraries = libraryRepository.findAllByMember(member);

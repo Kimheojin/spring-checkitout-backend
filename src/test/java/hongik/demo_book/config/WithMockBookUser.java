@@ -15,7 +15,7 @@ public @interface WithMockBookUser{
     // 이메일 대신 사용
     String email() default "huhiiijin1109@naver.com";
     String password() default "champsWinnerChelsea";
-    String membername() default "HeoJinJin";
+    String memberName() default "HeoJinJin";
     String[] roles() default {"ROLE_USER"};
 
 

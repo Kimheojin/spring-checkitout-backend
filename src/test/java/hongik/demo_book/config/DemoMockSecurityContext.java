@@ -36,7 +36,7 @@ public class DemoMockSecurityContext implements WithSecurityContextFactory<WithM
     public SecurityContext createSecurityContext(WithMockBookUser annotation) {
         String email = annotation.email(); // annotation 한번 가공 되어서 value로
         String password = annotation.password();
-        String memberName = annotation.membername(); // 마찬가지 membername
+        String memberName = annotation.memberName(); // 마찬가지 membername
         String[] roles = annotation.roles();
 
 
@@ -47,7 +47,7 @@ public class DemoMockSecurityContext implements WithSecurityContextFactory<WithM
 
 
         List<SimpleGrantedAuthority> authorities = testMember.getAuthorities().stream()
-                .map(auth -> new SimpleGrantedAuthority(auth))
+                .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 
 

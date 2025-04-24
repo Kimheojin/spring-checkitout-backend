@@ -38,7 +38,7 @@ public class MemberControllerTest {
         mockMvc.perform(get("/api/member"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.email").value("huhiiijin1109@naver.com"))
-                .andExpect(jsonPath("$.membername").value("HeoJinJin"))
+                .andExpect(jsonPath("$.memberName").value("HeoJinJin"))
                 .andExpect(jsonPath("$.authorityDtoSet[0].authorityName")
                         .value("ROLE_USER"))
                 .andExpect(status().isOk())

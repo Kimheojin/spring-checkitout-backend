@@ -5,9 +5,11 @@ package hongik.demo_book.controller;
 //로그인 비밀번호 변경 + 주소까지 반환 만들고 그거하기
 
 import hongik.demo_book.domain.CategoryName;
+import hongik.demo_book.domain.Member;
 import hongik.demo_book.dto.BookDto;
 import hongik.demo_book.dto.BookListDto;
 import hongik.demo_book.service.BookService;
+import hongik.demo_book.service.CustomUserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,7 @@ import java.util.List;
 public class BookController {
 
     private final BookService bookService;
+    private final CustomUserService customUserService;
 
     //도서 저장
     @PostMapping("/member/books")
@@ -30,7 +33,8 @@ public class BookController {
     public ResponseEntity<BookDto> saveMemberBook(
             @Valid @RequestBody BookDto bookdto
     ){
-        return ResponseEntity.ok(bookService.BookSave(bookdto));
+        Member member = customUserService.GetCurrentMember();
+        return ResponseEntity.ok(bookService.BookSave(bookdto, member));
     }
 
     @GetMapping("/member/books")
@@ -38,6 +42,7 @@ public class BookController {
     public ResponseEntity<List<BookDto>> MemberBookList(
             @Valid @RequestParam String categoryName
     ){
+        Member member = customUserService.GetCurrentMember();
 
         CategoryName categoryEnum;
         try {
@@ -49,7 +54,7 @@ public class BookController {
         BookListDto bookListDto = BookListDto.builder()
                 .categoryName(categoryEnum)  // Enum 타입으로 설정
                 .build();
-        return ResponseEntity.ok(bookService.BookList(bookListDto));
+        return ResponseEntity.ok(bookService.BookList(bookListDto, member));
     }
 
 
@@ -59,6 +64,7 @@ public class BookController {
     public ResponseEntity<List<BookDto>> MemberBookDelete(
             @Valid @RequestBody BookDto bookDto
     ){
-        return ResponseEntity.ok(bookService.BookDelete(bookDto));
+        Member member = customUserService.GetCurrentMember();
+        return ResponseEntity.ok(bookService.BookDelete(bookDto, member));
     }
 }

@@ -1,8 +1,10 @@
 package hongik.demo_book.controller;
 
+import hongik.demo_book.domain.Member;
 import hongik.demo_book.dto.AddressDto;
 import hongik.demo_book.dto.MemberDto;
 import hongik.demo_book.dto.response.AddressResponse;
+import hongik.demo_book.service.CustomUserService;
 import hongik.demo_book.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,6 +22,7 @@ import java.io.IOException;
 public class MemberController {
 
     private final MemberService memberService;
+    private final CustomUserService customUserService;
 
     //서버 동작 확인용 (Token 없어도 동작)
 
@@ -55,10 +58,10 @@ public class MemberController {
 
     //ADMIN만 허용
 
-    @GetMapping("/member/{membername}")
+    @GetMapping("/member/{memberEmail}")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<MemberDto> getMemberInfo(@PathVariable String membername) {
-        return ResponseEntity.ok(memberService.getMemberWithAuthorities(membername));
+    public ResponseEntity<MemberDto> getMemberInfo(@PathVariable String memberEmail) {
+        return ResponseEntity.ok(memberService.getMemberWithAuthorities(memberEmail));
     }
 
 
@@ -71,7 +74,8 @@ public class MemberController {
     public ResponseEntity<AddressDto> saveMemberAddress(
             @Valid @RequestBody AddressDto addressdto
     ) {
-        return ResponseEntity.ok(memberService.AddressSave(addressdto));
+        Member member = customUserService.GetCurrentMember();
+        return ResponseEntity.ok(memberService.AddressSave(addressdto, member));
     }
 
 
@@ -80,7 +84,8 @@ public class MemberController {
     @DeleteMapping("/member/address")
     @PreAuthorize("hasAnyRole('USER')")
     public ResponseEntity<AddressResponse> deleteMemberAddress() {
-        return ResponseEntity.ok(memberService.deleteAddress());
+        Member member = customUserService.GetCurrentMember();
+        return ResponseEntity.ok(memberService.deleteAddress(member));
     }
 
     //저장된 주소 반환
@@ -88,7 +93,8 @@ public class MemberController {
     @GetMapping("/member/address")
     @PreAuthorize("hasAnyRole('USER')")
     public ResponseEntity<AddressDto> returnMemberAddress(HttpServletRequest request){
-        return ResponseEntity.ok(memberService.AddressReturn());
+        Member member = customUserService.GetCurrentMember();
+        return ResponseEntity.ok(memberService.AddressReturn(member));
     }
 
 }

@@ -28,7 +28,6 @@ import java.util.List;
 public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
-    private final CustomUserService customUserService;
     private final AuthorityRepository authorityRepository;
     private final MemberAuthorityRepository memberAuthorityRepository;
     @Transactional
@@ -89,10 +88,7 @@ public class MemberService {
 
     //쓰기전용
     @Transactional
-    public AddressDto AddressSave(AddressDto addressdto) {
-
-
-        Member member = customUserService.GetCurrentMember();
+    public AddressDto AddressSave(AddressDto addressdto, Member member) {
 
         Address address = Address.builder()
                 .city(addressdto.getCity())
@@ -114,9 +110,9 @@ public class MemberService {
 
     //주소 삭제
     @Transactional
-    public AddressResponse deleteAddress() {
+    public AddressResponse deleteAddress(Member member) {
 
-        Member member = customUserService.GetCurrentMember();
+
 
         Address currentAddress = member.getAddress();
 
@@ -136,9 +132,9 @@ public class MemberService {
 
     //주소 목록 반환
     @Transactional(readOnly = true)
-    public AddressDto AddressReturn(){
+    public AddressDto AddressReturn(Member member){
 
-        Address address = customUserService.GetCurrentMember().getAddress();
+        Address address = member.getAddress();
         return AddressDto.builder()
                 .zipCode(address.getZipCode())
                 .street(address.getStreet())
