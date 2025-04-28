@@ -7,7 +7,7 @@ package hongik.demo_book.controller;
 import hongik.demo_book.domain.CategoryName;
 import hongik.demo_book.domain.Member;
 import hongik.demo_book.dto.BookDto;
-import hongik.demo_book.dto.BookListDto;
+import hongik.demo_book.dto.BookCategoryRequest;
 import hongik.demo_book.service.BookService;
 import hongik.demo_book.service.CustomUserService;
 import jakarta.validation.Valid;
@@ -51,10 +51,10 @@ public class BookController {
             return ResponseEntity.badRequest().body(Collections.emptyList());
         }
 
-        BookListDto bookListDto = BookListDto.builder()
+        BookCategoryRequest bookCategoryRequest = BookCategoryRequest.builder()
                 .categoryName(categoryEnum)  // Enum 타입으로 설정
                 .build();
-        return ResponseEntity.ok(bookService.BookList(bookListDto, member));
+        return ResponseEntity.ok(bookService.BookList(bookCategoryRequest, member));
     }
 
 

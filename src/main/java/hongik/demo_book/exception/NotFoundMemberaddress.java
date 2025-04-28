@@ -9,8 +9,6 @@ public class NotFoundMemberaddress extends CustomRuntimeException{
     public NotFoundMemberaddress() {
         super(MESSAGE);
     }
-
-
     @Override
     public int getstatusCode() {
         return HttpStatus.NOT_FOUND.value();

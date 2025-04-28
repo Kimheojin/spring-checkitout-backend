@@ -11,7 +11,7 @@ import lombok.*;
 public class BookDto {
     private String isbn13;
     //세가지 타입
-    //Favorite, Recommendation, read
+    //FAVORITE, RECOMMENDATION, READ
     private CategoryName categoryName;
 
 }

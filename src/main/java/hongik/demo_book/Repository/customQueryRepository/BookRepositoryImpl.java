@@ -16,7 +16,7 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 
 
     @Override
-    public List<Book> findBookBycategoryname(String categoryname, Member member) {
+    public List<Book> findBookByCategoryName(String categoryname, Member member) {
         return jpaQueryFactory.selectFrom(QBook.book)
                 .join(QBook.book.category, QCategory.category)
                 .where(QCategory.category.categoryName.eq(CategoryName.valueOf(categoryname))

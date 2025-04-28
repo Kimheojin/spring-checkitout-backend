@@ -6,16 +6,14 @@ import hongik.demo_book.Repository.CategoryRepository;
 import hongik.demo_book.domain.Book;
 import hongik.demo_book.domain.Category;
 import hongik.demo_book.domain.Member;
+import hongik.demo_book.dto.BookCategoryRequest;
 import hongik.demo_book.dto.BookDto;
-import hongik.demo_book.dto.BookListDto;
-import hongik.demo_book.exception.NotFoundBook;
-import hongik.demo_book.exception.NotFoundCategory;
+import hongik.demo_book.exception.CustomNotFound;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,32 +27,27 @@ public class BookService {
     @Transactional
     public List<BookDto> BookDelete(BookDto bookDto, Member member) {
 
-
-
-
         List<Category> categories = categoryRepository.findCategoriesWithMember(member);
 
         // 삭제할 도서가 속한 카테고리 찾기
         Category categoryToUpdate = categories.stream()
                 .filter(category -> category.getCategoryName().equals(bookDto.getCategoryName()))
                 .findFirst()
-                .orElseThrow(NotFoundCategory::new);
-
+                .orElseThrow(() -> new CustomNotFound("카테고리"));
 
 
         // 카테고리에서 삭제할 도서 찾기
-        Book bookToDelete = bookRepository.findBookBycategoryname(String.valueOf(categoryToUpdate.getCategoryName()), member)
+        Book bookToDelete = bookRepository.findBookByCategoryName(String.valueOf(categoryToUpdate.getCategoryName()), member)
                 .stream()
                 .filter(book -> book.getIsbn13().equals(bookDto.getIsbn13()))
                 .findFirst()
-                .orElseThrow(NotFoundBook::new);
+                .orElseThrow(() -> new CustomNotFound("책"));
 
         // 도서 삭제
-
         bookRepository.delete(bookToDelete);
 
         // 삭제 후 남아있는 도서 목록 반환
-        List<BookDto> remainingBooks = bookRepository.findBookBycategoryname(categoryToUpdate.getCategoryName().toString(), member).stream()
+        List<BookDto> remainingBooks = bookRepository.findBookByCategoryName(categoryToUpdate.getCategoryName().toString(), member).stream()
                 .map(book -> BookDto.builder()
                         .isbn13(book.getIsbn13())
                         .categoryName(categoryToUpdate.getCategoryName())
@@ -67,26 +60,22 @@ public class BookService {
     //도서 목록 반환
     //enum타입 카테고리 dto 받아서 책 목록 반환하는 식으로 해야할듯
     @Transactional(readOnly = true)
-    public List<BookDto> BookList(BookListDto bookListDto, Member member) {
-
-
+    public List<BookDto> BookList(BookCategoryRequest bookCategoryRequest, Member member) {
 
         List<Category> categories = categoryRepository.findCategoriesWithMember(member);
 
         Category categoryToUpdate = categories.stream()
-                .filter(category -> category.getCategoryName().equals(bookListDto.getCategoryName()))
+                .filter(category -> category.getCategoryName().equals(bookCategoryRequest.getCategoryName()))
                 .findFirst()
-                .orElseThrow(NotFoundCategory::new);
-
-
-        List<BookDto> remainingBooks = bookRepository.findBookBycategoryname(categoryToUpdate.getCategoryName().toString(), member).stream()
+                .orElseThrow(() -> new CustomNotFound("카테고리"));
+        List<BookDto> categoryBook = bookRepository.findBookByCategoryName(String.valueOf(categoryToUpdate.getCategoryName()), member).stream()
                 .map(book -> BookDto.builder()
                         .isbn13(book.getIsbn13())
                         .categoryName(categoryToUpdate.getCategoryName())
                         .build())
                 .collect(Collectors.toList());
 
-        return remainingBooks;
+        return categoryBook;
     }
 
 
@@ -114,10 +103,10 @@ public class BookService {
                 .category(category)
                 .build();
 
-        bookRepository.save(book);
+        Book savedBook = bookRepository.save(book);
 
         // BookDto를 반환
-        return new BookDto(book.getIsbn13(), book.getCategory().getCategoryName());
+        return new BookDto(savedBook.getIsbn13(), savedBook.getCategory().getCategoryName());
 
 
     }

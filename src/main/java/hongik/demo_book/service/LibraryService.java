@@ -5,8 +5,8 @@ import hongik.demo_book.Repository.LibraryRepository;
 import hongik.demo_book.domain.Library;
 import hongik.demo_book.domain.Member;
 import hongik.demo_book.dto.LibraryDto;
-import hongik.demo_book.exception.InvaliedInput;
-import hongik.demo_book.exception.NotFoundLibrary;
+import hongik.demo_book.exception.CustomNotFound;
+import hongik.demo_book.exception.InvalidInput;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +24,7 @@ public class LibraryService {
     public LibraryDto LibrarySave(LibraryDto libraryDto, Member member) {
 
         if(libraryDto == null){ // 널체크는 바로 하는 게 좋을지도
-            throw new InvaliedInput();
+            throw new InvalidInput();
         }
 
 
@@ -50,7 +50,7 @@ public class LibraryService {
                 .filter(library -> library.getLibraryCode().equals(libraryDto.getLibraryCode()))
                 .filter(library -> library.getLibraryStatus().equals(libraryDto.getLibraryStatus()))
                 .findFirst()
-                .orElseThrow(NotFoundLibrary::new);
+                .orElseThrow(() -> new CustomNotFound("도서관"));
 
         libraryRepository.delete(libraryToDelete);
 
