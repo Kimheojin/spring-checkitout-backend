@@ -6,7 +6,6 @@ Spring Boot 백엔드 REST API 서버 코드
 ## 배포 환경
 - **배포 방식**: AWS EC2 + AWS RDS (MySQL)
 - **서버 환경**: Amazon Linux, t2.micro
-- **인프라**: 자체 구축 및 관리
 
 ## 프로젝트 도식도
 
