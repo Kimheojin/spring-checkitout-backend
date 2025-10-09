@@ -3,7 +3,6 @@ package hongik.demo_book.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
-//즐겨찾기한 도서관 목록
 @Entity
 @Getter
 @Builder

@@ -39,8 +39,6 @@ public class SecurityConfig {
         http
                 // token을 사용하는 방식이기 때문에 csrf를 disable
                 .csrf(AbstractHttpConfigurer::disable)
-
-
                 .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(exceptionHandling -> exceptionHandling
                         .accessDeniedHandler(jwtAccessDeniedHandler)
@@ -51,7 +49,6 @@ public class SecurityConfig {
                 //h2 데이터베이스 허용//httprequests -> 접근에 대한 요청에 대한 설정
                 //순서 중요
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-
 
                         .requestMatchers("/api/hello", "/api/authenticate", "/api/signup").permitAll()//위 3가지는 허용
                         .requestMatchers(PathRequest.toH2Console()).permitAll()

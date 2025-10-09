@@ -39,4 +39,5 @@ out/
 ### 커스텀 ###
 src/main/resources/application-mysql.yml
 src/main/generated/
+application-jwt.yml
 

@@ -21,8 +21,6 @@ import static jakarta.persistence.FetchType.LAZY;
 @Table(name = "category")
 public class Category {
 
-    //name -> enum 으로 바꿔서 추가하기
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")

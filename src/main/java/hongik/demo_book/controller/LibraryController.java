@@ -4,7 +4,6 @@ import hongik.demo_book.domain.Member;
 import hongik.demo_book.dto.LibraryDto;
 import hongik.demo_book.service.CustomUserService;
 import hongik.demo_book.service.LibraryService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -41,13 +40,12 @@ public class LibraryController {
         return ResponseEntity.ok(libraryService.LibraryDelete(libraryDto, member));
     }
 
-
     @GetMapping("/member/librarys")
     @PreAuthorize("hasAnyRole('USER')")
     public ResponseEntity<List<LibraryDto>> returnMemberLibrary(){
         Member member = customUserService.GetCurrentMember();
         return ResponseEntity.ok(libraryService.LibraryList(member));
     }
-    //도서관 목록 반환
+
 
 }

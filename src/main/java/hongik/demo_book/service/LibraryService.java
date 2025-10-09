@@ -23,10 +23,9 @@ public class LibraryService {
     @Transactional
     public LibraryDto LibrarySave(LibraryDto libraryDto, Member member) {
 
-        if(libraryDto == null){ // 널체크는 바로 하는 게 좋을지도
+        if(libraryDto == null){
             throw new InvalidInput();
         }
-
 
         //status에 따라 저장하기
         Library library = Library.builder()

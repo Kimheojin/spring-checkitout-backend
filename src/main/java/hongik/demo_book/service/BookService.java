@@ -58,7 +58,6 @@ public class BookService {
     }
 
     //도서 목록 반환
-    //enum타입 카테고리 dto 받아서 책 목록 반환하는 식으로 해야할듯
     @Transactional(readOnly = true)
     public List<BookDto> BookList(BookCategoryRequest bookCategoryRequest, Member member) {
 

@@ -47,9 +47,6 @@ public class MemberController {
     }
 
     //USER권한이랑 ADMIN 모두 허용
-    //권한 정보 이용해서 내용 반환하는듯
-    //email도 반환
-
     @GetMapping("/member")
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<MemberDto> getMyMemberInfo(HttpServletRequest request) {
@@ -57,17 +54,11 @@ public class MemberController {
     }
 
     //ADMIN만 허용
-
     @GetMapping("/member/{memberEmail}")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<MemberDto> getMemberInfo(@PathVariable String memberEmail) {
         return ResponseEntity.ok(memberService.getMemberWithAuthorities(memberEmail));
     }
-
-
-
-    //주소 저장(구현 완료)
-    //주소 변경
 
     @PostMapping("/member/address")
     @PreAuthorize("hasAnyRole('USER')")
@@ -80,7 +71,6 @@ public class MemberController {
 
 
     //주소 삭제
-
     @DeleteMapping("/member/address")
     @PreAuthorize("hasAnyRole('USER')")
     public ResponseEntity<AddressResponse> deleteMemberAddress() {
@@ -89,7 +79,6 @@ public class MemberController {
     }
 
     //저장된 주소 반환
-
     @GetMapping("/member/address")
     @PreAuthorize("hasAnyRole('USER')")
     public ResponseEntity<AddressDto> returnMemberAddress(HttpServletRequest request){
