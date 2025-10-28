@@ -5,7 +5,7 @@ import hongik.demo_book.member.entity.Member;
 import hongik.demo_book.book.dto.RcdRequestDto;
 import hongik.demo_book.book.dto.RcdReturnDto;
 import hongik.demo_book.member.service.CustomUserService;
-import hongik.demo_book.service.FlaskService;
+import hongik.demo_book.book.service.FlaskService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package hongik.demo_book.service;
+package hongik.demo_book.member.service;
 
 import hongik.demo_book.member.repository.MemberRepository;
 import hongik.demo_book.member.entity.Member;

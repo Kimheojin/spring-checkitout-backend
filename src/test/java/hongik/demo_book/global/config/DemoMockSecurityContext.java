@@ -1,4 +1,4 @@
-package hongik.demo_book.config;
+package hongik.demo_book.global.config;
 
 
 import hongik.demo_book.member.repository.AuthorityRepository;

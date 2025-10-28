@@ -1,7 +1,7 @@
 package hongik.demo_book.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hongik.demo_book.config.WithMockBookUser;
+import hongik.demo_book.global.config.WithMockBookUser;
 import hongik.demo_book.member.dto.LoginDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,7 +1,7 @@
 package hongik.demo_book.controller;
 
 
-import hongik.demo_book.config.WithMockBookUser;
+import hongik.demo_book.global.config.WithMockBookUser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
