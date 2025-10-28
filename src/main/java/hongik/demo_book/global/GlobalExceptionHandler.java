@@ -1,5 +1,6 @@
 package hongik.demo_book.global;
 
+import hongik.demo_book.global.dto.ErrorResponse;
 import hongik.demo_book.global.exception.CustomRuntimeException;
 import org.springframework.http.ResponseEntity;
 

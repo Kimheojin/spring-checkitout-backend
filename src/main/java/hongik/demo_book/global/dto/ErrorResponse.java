@@ -1,4 +1,4 @@
-package hongik.demo_book.global;
+package hongik.demo_book.global.dto;
 
 
 import lombok.*;
