@@ -1,9 +1,9 @@
 package hongik.demo_book.service;
 
-import hongik.demo_book.Repository.MemberRepository;
-import hongik.demo_book.domain.Member;
-import hongik.demo_book.dto.repoDto.MemberWithAuthoritiesDto;
-import hongik.demo_book.exception.NotFoundMemberException;
+import hongik.demo_book.member.repository.MemberRepository;
+import hongik.demo_book.member.entity.Member;
+import hongik.demo_book.member.dto.MemberWithAuthoritiesDto;
+import hongik.demo_book.global.exception.NotFoundMemberException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

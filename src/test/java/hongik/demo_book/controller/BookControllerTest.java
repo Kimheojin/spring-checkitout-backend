@@ -2,14 +2,11 @@ package hongik.demo_book.controller;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hongik.demo_book.Repository.BookRepository;
+import hongik.demo_book.book.repository.BookRepository;
 import hongik.demo_book.config.WithMockBookUser;
-import hongik.demo_book.domain.CategoryName;
-import hongik.demo_book.domain.Member;
-import hongik.demo_book.dto.BookDto;
-import hongik.demo_book.dto.LoginDto;
-import hongik.demo_book.service.CustomUserService;
-import org.junit.jupiter.api.Assertions;
+import hongik.demo_book.cateogory.service.CategoryName;
+import hongik.demo_book.book.dto.BookDto;
+import hongik.demo_book.member.service.CustomUserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

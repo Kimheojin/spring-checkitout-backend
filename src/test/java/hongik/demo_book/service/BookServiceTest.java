@@ -1,15 +1,15 @@
 package hongik.demo_book.service;
 
 
-import hongik.demo_book.Repository.BookRepository;
-import hongik.demo_book.Repository.CategoryRepository;
-import hongik.demo_book.Repository.MemberRepository;
-import hongik.demo_book.domain.Book;
-import hongik.demo_book.domain.CategoryName;
-import hongik.demo_book.domain.Member;
-import hongik.demo_book.dto.BookCategoryRequest;
-import hongik.demo_book.dto.BookDto;
-import org.junit.jupiter.api.Assertions;
+import hongik.demo_book.book.repository.BookRepository;
+import hongik.demo_book.cateogory.Repository.CategoryRepository;
+import hongik.demo_book.member.repository.MemberRepository;
+import hongik.demo_book.book.entity.Book;
+import hongik.demo_book.book.service.BookService;
+import hongik.demo_book.cateogory.service.CategoryName;
+import hongik.demo_book.member.entity.Member;
+import hongik.demo_book.book.dto.BookCategoryRequest;
+import hongik.demo_book.book.dto.BookDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

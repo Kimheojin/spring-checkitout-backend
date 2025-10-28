@@ -1,14 +1,14 @@
 package hongik.demo_book.config;
 
 
-import hongik.demo_book.Repository.AuthorityRepository;
-import hongik.demo_book.Repository.MemberAuthorityRepository;
-import hongik.demo_book.Repository.MemberRepository;
-import hongik.demo_book.domain.Authority;
-import hongik.demo_book.domain.Member;
-import hongik.demo_book.domain.MemberAuthority;
-import hongik.demo_book.dto.repoDto.MemberWithAuthoritiesDto;
-import hongik.demo_book.exception.NoRoleUser;
+import hongik.demo_book.member.repository.AuthorityRepository;
+import hongik.demo_book.member.repository.MemberAuthorityRepository;
+import hongik.demo_book.member.repository.MemberRepository;
+import hongik.demo_book.member.entity.Authority;
+import hongik.demo_book.member.entity.Member;
+import hongik.demo_book.member.entity.MemberAuthority;
+import hongik.demo_book.member.dto.MemberWithAuthoritiesDto;
+import hongik.demo_book.global.exception.NoRoleUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

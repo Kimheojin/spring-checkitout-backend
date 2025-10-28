@@ -2,11 +2,12 @@ package hongik.demo_book.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hongik.demo_book.domain.CategoryName;
-import hongik.demo_book.domain.Member;
-import hongik.demo_book.dto.BookDto;
-import hongik.demo_book.dto.RcdRequestDto;
-import hongik.demo_book.dto.RcdReturnDto;
+import hongik.demo_book.book.service.BookService;
+import hongik.demo_book.cateogory.service.CategoryName;
+import hongik.demo_book.member.entity.Member;
+import hongik.demo_book.book.dto.BookDto;
+import hongik.demo_book.book.dto.RcdRequestDto;
+import hongik.demo_book.book.dto.RcdReturnDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;

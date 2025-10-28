@@ -1,0 +1,29 @@
+package hongik.demo_book.library.entity;
+
+import hongik.demo_book.member.entity.Member;
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class Library {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "library_id")
+    private Long id;
+
+    //도서관 코드
+    private String libraryCode;
+
+    @Enumerated(EnumType.STRING)
+    private LibraryStatus libraryStatus;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+
+}
