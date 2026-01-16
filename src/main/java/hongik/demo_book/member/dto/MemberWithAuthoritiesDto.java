@@ -24,6 +24,7 @@ public class MemberWithAuthoritiesDto {
     private String password;
     private List<String> authorities;
 
+    // authorities 없는 생성자 추가
     public MemberWithAuthoritiesDto(Long id, String memberName, String email, Address address, boolean activated, String password) {
         this.id = id;
         this.memberName = memberName;
