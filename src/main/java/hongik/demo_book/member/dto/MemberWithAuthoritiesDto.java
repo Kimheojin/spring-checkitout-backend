@@ -24,5 +24,14 @@ public class MemberWithAuthoritiesDto {
     private String password;
     private List<String> authorities;
 
+    public MemberWithAuthoritiesDto(Long id, String memberName, String email, Address address, boolean activated, String password) {
+        this.id = id;
+        this.memberName = memberName;
+        this.email = email;
+        this.address = address;
+        this.activated = activated;
+        this.password = password;
+    }
+
 
 }
