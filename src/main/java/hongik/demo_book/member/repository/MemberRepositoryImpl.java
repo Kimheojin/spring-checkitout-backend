@@ -3,9 +3,9 @@ package hongik.demo_book.member.repository;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import hongik.demo_book.domain.QAuthority;
-import hongik.demo_book.domain.QMember;
-import hongik.demo_book.domain.QMemberAuthority;
+import hongik.demo_book.member.entity.QAuthority;
+import hongik.demo_book.member.entity.QMember;
+import hongik.demo_book.member.entity.QMemberAuthority;
 import hongik.demo_book.member.dto.MemberWithAuthoritiesDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

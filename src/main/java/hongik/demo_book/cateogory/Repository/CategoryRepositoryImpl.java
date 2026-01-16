@@ -4,7 +4,7 @@ package hongik.demo_book.cateogory.Repository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import hongik.demo_book.cateogory.service.Category;
 import hongik.demo_book.member.entity.Member;
-import hongik.demo_book.domain.QCategory;
+import hongik.demo_book.cateogory.service.QCategory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

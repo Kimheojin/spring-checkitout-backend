@@ -4,8 +4,8 @@ package hongik.demo_book.library.repository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import hongik.demo_book.library.entity.Library;
 import hongik.demo_book.member.entity.Member;
-import hongik.demo_book.domain.QLibrary;
-import hongik.demo_book.domain.QMember;
+import hongik.demo_book.library.entity.QLibrary;
+import hongik.demo_book.member.entity.QMember;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

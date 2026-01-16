@@ -5,6 +5,8 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import hongik.demo_book.book.entity.Book;
 import hongik.demo_book.cateogory.service.CategoryName;
 import hongik.demo_book.member.entity.Member;
+import hongik.demo_book.book.entity.QBook;
+import hongik.demo_book.cateogory.service.QCategory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
