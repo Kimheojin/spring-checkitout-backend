@@ -1,7 +1,8 @@
 # 책키라웃 (CheckItOut) - 도서 추천 및 공공도서관 연계 서비스
 
-- **Spring Boot 기반의 백엔드 REST API 서버**
-- **배경**: 공공도서관의 낮은 장서 수와 방문자 수 문제를 해결하기 위해, 사용자에게 맞춤형 도서 추천과 통합 도서관 정보를 제공하는 애플리케이션 개발을 목표로 함
+- Spring Boot 기반으로 도서 추천, 내 서재, 공공도서관 정보를 제공하는 백엔드 REST API 프로젝트
+- Flask 기반 AI 추천 서버와 연동해 사용자 맞춤형 도서 추천 기능을 구현
+- JWT 인증/인가, 관심 도서관 즐겨찾기, 주소 관리 기능을 제공하며 AWS EC2와 RDS 환경에서 운영
 
 ## 1. 주요 기능
 
@@ -15,7 +16,7 @@
 - **Database**: MySQL, Hibernate
 - **Infra**: AWS EC2, AWS RDS (MySQL), Amazon Linux
 
-## 3. 아키텍처
+## 3. 아키텍처j
 
 ![System Architecture](docs/readme/System_Architecture.png.png)
 
