@@ -16,9 +16,9 @@
 - **Database**: MySQL, Hibernate
 - **Infra**: AWS EC2, AWS RDS (MySQL), Amazon Linux
 
-## 3. 아키텍처j
+## 3. 아키텍처
 
-![System Architecture](docs/readme/System_Architecture.png.png)
+![System Architecture](https://res.cloudinary.com/dtrxriyea/image/upload/v1786427892/%EC%A1%B8%EC%97%85_%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%EB%8F%84%EC%8B%9D%EB%8F%84_qevom2.png)
 
 ## 4. API 문서 (API Documentation)
 
