@@ -20,11 +20,7 @@
 
 ![System Architecture](https://res.cloudinary.com/dtrxriyea/image/upload/v1786427892/%EC%A1%B8%EC%97%85_%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%EB%8F%84%EC%8B%9D%EB%8F%84_qevom2.png)
 
-## 4. API 문서 (API Documentation)
-
-- [Postman API Documentation](https://documenter.getpostman.com/view/32521050/2sAXjQ1AKk)
-
-## 5. 학술 성과 (프로젝트 연계 논문)
+## 4. 학술 성과 (프로젝트 연계 논문)
 
 **KSC(Korean Software Congress) 2024 Poster Section 논문 Accept**
 
@@ -99,7 +95,7 @@
 - **모니터링**: AOP를 활용한 메소드 레벨 로그 분석 및 실행 시간 측정
 - **측정 지표**: Throughput, 데이터 송수신량(KB/sec), Latency
 
-## 6. 디렉토리 구조
+## 5. 디렉토리 구조
 
 ```text
 src/main/java/hongik/demo_book/
@@ -117,3 +113,7 @@ src/main/resources/
 docs/
 └── readme/     # README 관련 리소스 (이미지 등)
 ```
+
+## 6. API 문서 (API Documentation)
+
+- [Postman API Documentation](https://documenter.getpostman.com/view/32521050/2sAXjQ1AKk)
